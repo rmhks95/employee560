@@ -1,5 +1,16 @@
-const express = require('express');
-const app = express();
+const sql = require('mssql')
+
+
+sql.connect('mssql://username:password@localhost/database')
+
+async function db(){
+    try {
+        const result = await sql.query`select * from mytable where id = ${value}`
+        console.dir(result)
+    } catch (err) {
+        // ... error checks
+    }
+}
 
 function getAll(req,res){
   var list = ["item1","item2", "item3"];
