@@ -3,10 +3,11 @@ const sql = require('mssql')
 
 sql.connect('mssql://username:password@localhost/database')
 
-async function db(){
+ async function db(){
     try {
+      // const result =""
         const result = await sql.query(`select * from mytable where id = ${value}`)
-        console.dir(result)
+        console.log(result)
     } catch (err) {
         // ... error checks
     }
@@ -17,28 +18,36 @@ function getAll(req,res){
   res.json(list)
 }
 
-function getEmployee(req, res) {
-  const {id} = req.params;
-
+async function getEmployee(req, res) {
+  try {
+    const {id} = req.params;
+    // const result =""
+      const result = await sql.query(`select * from mytable where id = ${value}`)
+      console.log(result)
+  } catch (err) {
+      // ... error checks
+  }
   res.json(list);
 }
 
-function custom(req,res){
+async function custom(req,res){
   const {query} = req.body;
   try {
+    // const result =""
     const result = await sql.query(query)
-    console.dir(result)
+    console.log(result)
     res.json(result)
   } catch (err) {
       // ... error checks
   }
 }
 
-function newEmployee(req,rest){
+async function newEmployee(req,rest){
   const {value} = req.body;
   try {
+    // const result =""
     const result = await sql.query(`INSERT INTO mytable() VALUES ${value}`)
-    console.dir(result)
+    console.log(result)
     res.json(result)
   } catch (err) {
       // ... error checks

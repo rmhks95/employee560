@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "open http://localhost:5000/ && nodemon index.js "
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mssql": "^4.2.2",
+    "n": "^2.1.12",
+    "nodemon": "^1.18.5"
   },
   "proxy": "http://localhost:5000"
 }
