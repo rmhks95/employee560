@@ -17,9 +17,14 @@ app.get('/api/getEmployee/:id', (req,res) =>  {
     services.getEmployee(req,res);
 });
 
+app.post('/api/custom', (req,res)=> {
+    services.custom(req,res);
+})
+
 app.post('/api/newEmployee', (req, res) => {
     services.newEmployee(req,res);
-})
+});
+
 
 
 
