@@ -37,7 +37,7 @@ function custom(req,res){
 function newEmployee(req,rest){
   const {value} = req.body;
   try {
-    const result = await sql.query(`INSERT INTO mytable() VALUE ${value}`)
+    const result = await sql.query(`INSERT INTO mytable() VALUES ${value}`)
     console.dir(result)
     res.json(result)
   } catch (err) {
