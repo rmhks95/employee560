@@ -14,8 +14,9 @@
     "express": "^4.16.3",
     "mssql": "^4.2.2",
     "n": "^2.1.12",
-    "odbc": "^1.4.5",
-    "node":"^11.0.0"
+    "node": "^11.0.0",
+    "node-bin-setup": "^1.0.6",
+    "odbc": "^1.4.5"
   },
   "proxy": "http://localhost:5000"
 }
