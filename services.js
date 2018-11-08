@@ -1,46 +1,13 @@
 const sql = require('mssql')
 
-var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
-
-// Create connection to database
-var config = 
-   {
-     userName: 'grp23', // update me
-     password: 'Wildcats111', // update me
-     server: 'cis560.database.windows.net', // update me
-     options: 
-        {
-           database: 'Employee' //update me
-           , encrypt: true
-        }
-   }
-
-//sql.connect('mssql://username:password@localhost/database')
 
 sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
-
-// // Attempt to connect and execute queries if connection goes through
-// connection.on('connect', function(err) 
-//    {
-//      if (err) 
-//        {
-//           console.log(err)
-//        }
-//     else
-//        {
-//            get()
-//        }
-//    }
-//  );
-
-
  
-async function get(req,res){
+async function getDepartments(req,res){
     try {
         
         const result = await sql.query`select * from Employee.Department`
-
+        // sql.close()
         res.json(result["recordset"]);
     } catch (err) {
         // ... error checks
@@ -48,28 +15,6 @@ async function get(req,res){
 }
 
 
-
-function huh(){ 
-  
-    console.log('Reading rows from the Table...');
-
-       // Read all rows from table
-     request = new Request(
-          "SELECT * FROM Employee.Department",
-             function(err, rowCount, rows) 
-                {
-                    console.log(rowCount + ' row(s) returned');
-                    //process.exit();
-                }
-            );
-
-     request.on('row', function(columns) {
-        columns.forEach(function(column) {
-           res.json("%s\t%s", column.metadata.colName, column.value);
-         });
-             });
-     connection.execSql(request);
-   }
 
 
 
@@ -133,4 +78,4 @@ async function newEmployee(req,rest){
 
 
 
-module.exports = {getAll, getEmployee, custom, newEmployee,get}
+module.exports = {getAll, getEmployee, custom, newEmployee,getDepartments}

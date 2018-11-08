@@ -5,39 +5,42 @@ class List extends Component {
   constructor(props){
     super(props);
     this.state = {
-      list: []
+      list: ''
     }
   }
 
   // Fetch the list on first mount
-  componentDidMount() {
+  componentWillMount() {
     this.getList();
   }
 
   // Retrieves the list of items from the Express app
   getList = () => {
-    fetch('https://560project.azurewebsites.net/api/custom')
+    fetch('https://560project.azurewebsites.net/api/departments')
     .then(res => res.json())
-    .then(list => console.log(list))//this.setState({list}))
+    .then(info => {
+        info.map(dept=>this.setState({list:dept["Name"]}))
+    }).catch(err=>console.log(err))
   }
 
   render() {
     const { list } = this.state;
-
+    console.log(list)
     return (
       <div className="App">
-        <h1>List of Items</h1>
+        <h1>List of Departments</h1>
         {/* Check to see if any items are found*/}
         {list.length ? (
           <div>
             {/* Render the list of items */}
-            {list.map((item,index) => {
-              return(
-                <div key={index}>
-                  {item}
+            
+                <div>
+                  {list}
                 </div>
-              );
-            })}
+             
+
+            
+
           </div>
         ) : (
           <div>
