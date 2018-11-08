@@ -18,7 +18,7 @@ var config =
 
 //sql.connect('mssql://username:password@localhost/database')
 
-var connection = new Connection(config);
+sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
 
 // // Attempt to connect and execute queries if connection goes through
 // connection.on('connect', function(err) 
@@ -38,8 +38,9 @@ var connection = new Connection(config);
  
 async function get(req,res){
     try {
-        await sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
+        
         const result = await sql.query`select * from Employee.Department`
+
         res.json(result["recordset"]);
     } catch (err) {
         // ... error checks
