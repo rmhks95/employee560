@@ -35,14 +35,9 @@ class Departments extends Component {
         {list.length ? (
           <div>
             {/* Render the list of items */}
-            
                 <div>
                   {list.map((dept,index)=><div key={index}>{dept["Name"]} - {dept["Description"]}</div>)}
                 </div>
-             
-
-            
-
           </div>
         ) : (
           <div>

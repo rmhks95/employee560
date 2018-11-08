@@ -5,7 +5,6 @@ sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encr
  
 async function getDepartments(req,res){
     try {
-        
         const result = await sql.query`select * from Employee.Department`
         // sql.close()
         res.json(result["recordset"]);
@@ -14,25 +13,6 @@ async function getDepartments(req,res){
     }
 }
 
-
-
-
-
- async function no(){
-  db.open(cn, function (err) {
-    if (err) return console.log(err);
-    
-    db.query('select * from Employee.Employee', function (err, data) {
-      if (err) console.log(err);
-      
-      console.log(data);
-   
-      db.close(function () {
-        console.log('done');
-      });
-    });
-  });
-}
 
 function getAll(req,res){
   var list = ["item1","item2", "item3"];
@@ -43,9 +23,9 @@ async function getEmployee(req, res) {
   try {
     const {id} = req.params;
     // const result =""
-      //const result = await sql.query(`select * from mytable where id = ${value}`)
+      const result = await sql.query(`select * from Employee.Employee where EmployeeId = ${id}`)
       //console.log(result)
-      res.json(id)
+      res.json(result["recordset"])
   } catch (err) {
       // ... error checks
   }
@@ -67,7 +47,6 @@ async function custom(req,res){
 async function newEmployee(req,rest){
   const {value} = req.body;
   try {
-    // const result =""
     const result = await sql.query(`INSERT INTO mytable() VALUES ${value}`)
     console.log(result)
     res.json(result)

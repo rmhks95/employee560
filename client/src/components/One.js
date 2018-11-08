@@ -12,12 +12,12 @@ class One extends Component {
 
   // Fetch the list on first mount
   componentDidMount() {
-    this.getOne();
+    //this.getOne();
   }
 
   // Retrieves the list of items from the Express app
   getOne(){
-    var idNumber = "9";
+    var idNumber = document.getElementById("employeeID").value;
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ idNumber)
     .then(res => res.json())
     .then(idNum =>  this.setState({idNum}))
@@ -27,10 +27,12 @@ class One extends Component {
     const { idNum } = this.state;
     return (
       <div className="App">
-        <h1>List of Items</h1>
-        {/* Check to see if any items are found*/}
-        {idNum.length ? (
-          <div>
+      <h1>Find Employee</h1>
+      {/* Check to see if any items are found*/}
+        Enter Employee Number: <input type="text" id="employeeID"></input>
+        <button type="submit" onClick={this.getOne}>Submit</button>
+      {idNum.length ? (
+          <div><br></br>
                 <div>
                   Employee ID: {idNum}
                 </div>
