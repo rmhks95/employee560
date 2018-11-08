@@ -40,7 +40,7 @@ async function get(req,res){
     try {
         await sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
         const result = await sql.query`select * from Employee.Department`
-        res.json(result["recordset"])
+        res.json(result["recordset"]);
     } catch (err) {
         // ... error checks
     }

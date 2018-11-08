@@ -16,9 +16,9 @@ class List extends Component {
 
   // Retrieves the list of items from the Express app
   getList = () => {
-    fetch('https://560project.azurewebsites.net/api/getAll')
+    fetch('https://560project.azurewebsites.net/api/custom')
     .then(res => res.json())
-    .then(list => this.setState({list}))
+    .then(list => console.log(list))//this.setState({list}))
   }
 
   render() {
