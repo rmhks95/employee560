@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class One extends Component {
   // Initialize the state
   constructor(props){
     super(props);
     this.state = {
-      idNum: ''
+      idNum: []
     }
     this.getOne = this.getOne.bind(this);
   }
@@ -20,7 +21,11 @@ class One extends Component {
     var idNumber = document.getElementById("employeeID").value;
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ idNumber)
     .then(res => res.json())
-    .then(idNum =>  this.setState({idNum}))
+    .then(employee => { 
+      var list = [];
+      employee.map(info=> list.push(info))
+      this.setState({idNum:list})
+    }).catch(err=> console.log(err))
   }
 
   render() {
@@ -34,7 +39,19 @@ class One extends Component {
       {idNum.length ? (
           <div><br></br>
                 <div>
-                  Employee ID: {idNum}
+                Employee: {idNum.map((dept,index)=>{ 
+                  return(
+                    <div>
+                      Name: {dept["FirstName"]} {dept["LastName"]}
+                      <br/>
+                      Started On: {moment(dept["DateStarted"]).format('L')}
+                      <br/>
+                      {dept["DateLeft"]? `Date Left: ${moment(dept["DateLeft"]).format('L')}`:""}
+                      {dept["DateLeft"]?<br/>:""}
+                      Email: {dept["Email"]}
+
+                    </div>
+                  )})}
                 </div>
           </div>
         ) : (

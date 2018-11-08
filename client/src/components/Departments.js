@@ -5,8 +5,7 @@ class Departments extends Component {
   constructor(props){
     super(props);
     this.state = {
-      list: [],
-      set:false
+      list: []
     }
   }
 
