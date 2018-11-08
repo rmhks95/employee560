@@ -22,9 +22,9 @@ async function getEmployee(req, res) {
   try {
     const {id} = req.params;
     // const result =""
-      const result = await sql.query(`select * from mytable where id = ${value}`)
-      console.log(result)
-      res.json(9)
+      //const result = await sql.query(`select * from mytable where id = ${value}`)
+      //console.log(result)
+      res.json(id)
   } catch (err) {
       // ... error checks
   }
