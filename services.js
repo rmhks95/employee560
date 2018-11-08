@@ -24,6 +24,7 @@ async function getEmployee(req, res) {
     // const result =""
       const result = await sql.query(`select * from mytable where id = ${value}`)
       console.log(result)
+      res.json(id)
   } catch (err) {
       // ... error checks
   }

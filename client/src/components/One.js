@@ -20,7 +20,7 @@ class One extends Component {
     var idNumber = "9";
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ idNumber)
     .then(res => res.json())
-    .then(idNum =>  this.setState({idNum}))
+    .then(idNum =>  console.log(idNum));//this.setState({idNum}))
   }
 
   render() {
