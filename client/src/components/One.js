@@ -18,7 +18,7 @@ class One extends Component {
   // Retrieves the list of items from the Express app
   getOne(){
     var idNumber = "9";
-    fetch('/api/getEmployee/'+ idNumber)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ idNumber)
     .then(res => res.json())
     .then(idNum =>  this.setState({idNum}))
   }
