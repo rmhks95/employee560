@@ -1,16 +1,91 @@
 const sql = require('mssql')
 
+var Connection = require('tedious').Connection;
+var Request = require('tedious').Request;
 
-sql.connect('mssql://username:password@localhost/database')
+// Create connection to database
+var config = 
+   {
+     userName: 'grp23', // update me
+     password: 'Wildcats111', // update me
+     server: 'cis560.database.windows.net', // update me
+     options: 
+        {
+           database: 'Employee' //update me
+           , encrypt: true
+        }
+   }
 
- async function db(){
+//sql.connect('mssql://username:password@localhost/database')
+
+var connection = new Connection(config);
+
+// // Attempt to connect and execute queries if connection goes through
+// connection.on('connect', function(err) 
+//    {
+//      if (err) 
+//        {
+//           console.log(err)
+//        }
+//     else
+//        {
+//            get()
+//        }
+//    }
+//  );
+
+
+ 
+async function get(req,res){
     try {
-      // const result =""
-        const result = await sql.query(`select * from mytable where id = ${value}`)
-        console.log(result)
+        await sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
+        const result = await sql.query`select * from Employee.Department where DepartmentId = 1`
+        res.json(result["recordset"])
     } catch (err) {
         // ... error checks
     }
+}
+
+
+
+function huh(){ 
+  
+    console.log('Reading rows from the Table...');
+
+       // Read all rows from table
+     request = new Request(
+          "SELECT * FROM Employee.Department",
+             function(err, rowCount, rows) 
+                {
+                    console.log(rowCount + ' row(s) returned');
+                    //process.exit();
+                }
+            );
+
+     request.on('row', function(columns) {
+        columns.forEach(function(column) {
+           res.json("%s\t%s", column.metadata.colName, column.value);
+         });
+             });
+     connection.execSql(request);
+   }
+
+
+
+ async function no(){
+  db.open(cn, function (err) {
+    if (err) return console.log(err);
+    
+    db.query('select * from Employee.Employee', function (err, data) {
+      if (err) console.log(err);
+      
+      console.log(data);
+   
+      db.close(function () {
+        console.log('done');
+      });
+    });
+  });
 }
 
 function getAll(req,res){
@@ -57,4 +132,4 @@ async function newEmployee(req,rest){
 
 
 
-module.exports = {getAll, getEmployee, custom, newEmployee}
+module.exports = {getAll, getEmployee, custom, newEmployee,get}
