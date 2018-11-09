@@ -23,7 +23,20 @@ async function getEmployee(req, res) {
   try {
     const {id} = req.params;
     // const result =""
-      const result = await sql.query(`select * from Employee.Employee where EmployeeId = ${id}`)
+      //const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
+      const result = await sql.query(`select E.FistName,
+      E.LastName,
+      E.Email,
+      P.Title,
+      O.Building,
+      O.OfficeID,
+      D.Name
+      from Employee.Employee E 
+          INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+          INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+          INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+      where EmployeeId = ${id}`)
+      
       //console.log(result)
       res.json(result["recordset"])
   } catch (err) {
@@ -47,7 +60,7 @@ async function custom(req,res){
 async function newEmployee(req,rest){
   const {value} = req.body;
   try {
-    const result = await sql.query(`INSERT INTO mytable() VALUES ${value}`)
+    const result = await sql.query(`INSERT INTO Employee.Employee VALUES ${value}`)
     console.log(result)
     res.json(result)
   } catch (err) {
