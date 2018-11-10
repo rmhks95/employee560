@@ -39,20 +39,20 @@ class One extends Component {
       {idNum.length ? (
           <div><br></br>
                 <div>
-                Employee: {idNum.map((dept,index)=>{ 
+                Employee: {idNum.map((emp,index)=>{ 
                   return(
                     <div>
-                      Name: {dept["FirstName"]} {dept["LastName"]}
+                      Name: {emp["FirstName"]} {emp["LastName"]}
                       <br/>
-                      Started On: {moment(dept["DateStarted"]).format('L')}
+                      Started On: {moment(emp["DateStarted"]).format('L')}
                       <br/>
-                      {dept["DateLeft"]? `Date Left: ${moment(dept["DateLeft"]).format('L')}`:""}
-                      {dept["DateLeft"]?<br/>:""}
-                      Email: {dept["Email"]}
+                      {emp["DateLeft"]? `Date Left: ${moment(emp["DateLeft"]).format('L')}`:""}
+                      {emp["DateLeft"]?<br/>:""}
+                      Email: {emp["Email"]}
                       <br/>
-                      Position: {dept["Title"]} in {dept["DepartmentName"]}
+                      Position: {emp["Title"]} in {emp["DepartmentName"]}
                       <br/>
-                      Office: {dept["RoomNumber"]} in {dept["Building"]}
+                      Office: {emp["RoomNumber"]} in {emp["Building"]}
                     </div>
                   )})}
                 </div>
