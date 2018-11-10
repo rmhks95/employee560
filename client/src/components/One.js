@@ -49,7 +49,10 @@ class One extends Component {
                       {dept["DateLeft"]? `Date Left: ${moment(dept["DateLeft"]).format('L')}`:""}
                       {dept["DateLeft"]?<br/>:""}
                       Email: {dept["Email"]}
-
+                      <br/>
+                      Position: {dept["Title"]} in {dept["DepartmentName"]}
+                      <br/>
+                      Office: {dept["RoomNumber"]} in {dept["Building"]}
                     </div>
                   )})}
                 </div>
