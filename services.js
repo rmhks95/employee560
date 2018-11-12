@@ -6,9 +6,7 @@ sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encr
 async function getFields(req,res){
     const {name} = req.params;
     try {
-        console.log(name)
-        query = `select * from Employee.${name}`
-        console.log(query)
+        const query = `select * from Employee.${name}`
         const result = await sql.query(query)
         // sql.close()
         res.json(result["recordset"]);
@@ -49,26 +47,31 @@ async function getEmployee(req, res) {
   res.json(list);
 }
 
-async function custom(req,res){
-  const {query} = req.body;
-  try {
-    // const result =""
-    const result = await sql.query(query)
-    console.log(result)
-    res.json(result)
-  } catch (err) {
-      // ... error checks
-  }
-}
+ async function custom(req,res){
+//   const {query} = req.body;
+//   try {
+//     // const result =""
+//     const result = await sql.query(query)
+//     console.log(result)
+//     res.json(result)
+//   } catch (err) {
+//       // ... error checks
+//   }
+ }
 
-async function newEmployee(req,rest){
-  const {value} = req.body;
+async function newEmployee(req,res){
+  const {firstName,lastName, startDate, email,position,office, department} = req.body
   try {
-    const result = await sql.query(`INSERT INTO Employee.Employee VALUES ${value}`)
-    console.log(result)
+    const officeParts = office.split(' in ');
+    const query = `Insert into Employee.Employee(firstName, lastName, datestarted, email, positionid, officeid, departmentid) 
+    Values('${firstName}','${lastName}','${startDate}','${email}',
+        (select positionID from Employee.Position P where P.Title='${position}'), 
+        (select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
+        (select departmentID from Employee.Department D where D.Name = '${department}'))`
+    const result = await sql.query(query)
     res.json(result)
   } catch (err) {
-      // ... error checks
+      console.log(err)
   }
 }
 

@@ -8,7 +8,7 @@ class newEmployee extends Component {
     this.state = {
       idNum: []
     }
-    this.getOne = this.getOne.bind(this);
+    this.makeEmployee = this.makeEmployee.bind(this);
     this.getDepts = this.getDepts.bind(this);
     this.getPositions = this.getPositions.bind(this);
     this.getOffices = this.getOffices.bind(this);
@@ -22,15 +22,27 @@ class newEmployee extends Component {
   }
 
   // Retrieves the list of items from the Express app
-  getOne(){
-    var idNumber = document.getElementById("employeeID").value;
-    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ idNumber)
+  makeEmployee(){
+    var newEmployee = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        startDate: document.getElementById("startDate").value,
+        email: document.getElementById("email").value,
+        position: document.getElementById("position").value,
+        office: document.getElementById("office").value,
+        department: document.getElementById("department").value
+    }
+
+    fetch('http://localhost:5000/api/newEmployee/',{
+        method: 'POST',
+        body: JSON.stringify(newEmployee),
+        headers:{
+            'Content-Type': 'application/json'
+          }
+      })
     .then(res => res.json())
-    .then(employee => { 
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    .then(info => console.log(info))
+    .catch(err=> console.log(err))
   }
 
     // Retrieves the list of items from the Express app
@@ -41,7 +53,7 @@ class newEmployee extends Component {
             info.map(depts=> { 
                 var deptList = document.getElementById("departmentList")
                 var newOptionElement = document.createElement("option");
-                newOptionElement.textContent = depts["name"];
+                newOptionElement.textContent = depts["Name"];
                 deptList.appendChild(newOptionElement);
             })
         }).catch(err=>console.log(err))
@@ -54,7 +66,7 @@ class newEmployee extends Component {
           info.map(position=> {
               var posList = document.getElementById("positionList")
               var newOptionElement = document.createElement("option");
-              newOptionElement.textContent = position["title"];
+              newOptionElement.textContent = position["Title"];
               posList.appendChild(newOptionElement);
             })
         }).catch(err=>console.log(err))
@@ -67,7 +79,7 @@ class newEmployee extends Component {
           info.map(office=> {
               var offList = document.getElementById("officeList")
               var newOptionElement = document.createElement("option");
-              newOptionElement.textContent = office["roomnumber"] + " in "+ office["building"];
+              newOptionElement.textContent = office["RoomNumber"] + " in "+ office["Building"];
               offList.appendChild(newOptionElement);
             })
         }).catch(err=>console.log(err))
@@ -83,9 +95,9 @@ class newEmployee extends Component {
         Start Date <input type="date" id="startDate"></input>
         Email: <input type="text" id="email"></input>
         Position: <input id="position" list="positionList"></input><datalist id="positionList"></datalist>
-        Office: <input id="office" list="positionList"></input><datalist id="officeList"></datalist>
+        Office: <input id="office" list="officeList"></input><datalist id="officeList"></datalist>
         Department: <input id="department" list="departmentList"></input><datalist id="departmentList"></datalist>
-        <button type="submit" onClick={this.getOne}>Submit</button>
+        <button type="submit" onClick={this.makeEmployee}>Submit</button>
       {false ? (
           <div><br></br>
                 <div>

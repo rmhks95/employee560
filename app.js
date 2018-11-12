@@ -1,11 +1,25 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser')
 const services = require('./services.js')
 
 const app = express();
 
+
+
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // An api endpoint that returns a short list of items
 app.get('/api/getAll', (req,res) =>  {
