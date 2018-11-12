@@ -42,28 +42,32 @@ class newEmployee extends Component {
       })
     .then(res => res.json())
     .then(info => {
-        document.getElementById("firstName").value="";
-        document.getElementById("lastName").value="";
-        document.getElementById("startDate").value="";
-        document.getElementById("email").value="";
-        document.getElementById("position").value="";
-        document.getElementById("office").value="";
-        document.getElementById("department").value="";
-        setTimeout(function () {
-            document.getElementById("alarmmsg").innerHTML = "Employee Added";
-        }, 3000);
-        
-        // Now remove alarmmsg's content.
-        document.getElementById("alarmmsg").innerHTML = ""; 
+        if(info.code !== "EREQUEST"){
+            document.getElementById("firstName").value="";
+            document.getElementById("lastName").value="";
+            document.getElementById("startDate").value="";
+            document.getElementById("email").value="";
+            document.getElementById("position").value="";
+            document.getElementById("office").value="";
+            document.getElementById("department").value="";
+            setTimeout(function () {
+                document.getElementById("alarmmsg").innerHTML = "Employee Added";
+            }, 3000);
+            
+            // Now remove alarmmsg's content.
+            document.getElementById("alarmmsg").innerHTML = ""; 
+        }else{
+            setTimeout(function () {
+                document.getElementById("alarmmsg").innerHTML = "Failed to Added Employee";
+            }, 3000);
+            
+            // Now remove alarmmsg's content.
+            document.getElementById("alarmmsg").innerHTML = ""; 
+        }
     })
     .catch(err=> {
         console.log(err)
-        setTimeout(function () {
-            document.getElementById("alarmmsg").innerHTML = "Failed to Added Employee";
-        }, 3000);
-        
-        // Now remove alarmmsg's content.
-        document.getElementById("alarmmsg").innerHTML = ""; 
+       
     })
   }
 
@@ -115,7 +119,7 @@ class newEmployee extends Component {
       {/* Check to see if any items are found*/}
         First Name: <input type="text" id="firstName"></input>
         Last Name: <input type="text" id="lastName"></input>
-        Start Date <input type="date" id="startDate"></input>
+        Start Date: <input type="date" id="startDate"></input>
         Email: <input type="text" id="email"></input>
         Position: <input id="position" list="positionList"></input><datalist id="positionList"></datalist>
         Office: <input id="office" list="officeList"></input><datalist id="officeList"></datalist>
