@@ -41,8 +41,30 @@ class newEmployee extends Component {
           }
       })
     .then(res => res.json())
-    .then(info => console.log(info))
-    .catch(err=> console.log(err))
+    .then(info => {
+        document.getElementById("firstName").value="";
+        document.getElementById("lastName").value="";
+        document.getElementById("startDate").value="";
+        document.getElementById("email").value="";
+        document.getElementById("position").value="";
+        document.getElementById("office").value="";
+        document.getElementById("department").value="";
+        setTimeout(function () {
+            document.getElementById("alarmmsg").innerHTML = "Employee Added";
+        }, 3000);
+        
+        // Now remove alarmmsg's content.
+        document.getElementById("alarmmsg").innerHTML = ""; 
+    })
+    .catch(err=> {
+        console.log(err)
+        setTimeout(function () {
+            document.getElementById("alarmmsg").innerHTML = "Failed to Added Employee";
+        }, 3000);
+        
+        // Now remove alarmmsg's content.
+        document.getElementById("alarmmsg").innerHTML = ""; 
+    })
   }
 
     // Retrieves the list of items from the Express app
@@ -89,6 +111,7 @@ class newEmployee extends Component {
     return (
       <div className="App">
       <h1>New Employee</h1>
+        <h2 id="alarmmsg"></h2>
       {/* Check to see if any items are found*/}
         First Name: <input type="text" id="firstName"></input>
         Last Name: <input type="text" id="lastName"></input>
@@ -121,7 +144,7 @@ class newEmployee extends Component {
           </div>
         ) : (
           <div>
-            <h2>No List Items Found</h2>
+            {/* <h2>No List Items Found</h2> */}
           </div>
         )
       }
