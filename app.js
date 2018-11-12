@@ -26,6 +26,10 @@ app.get('/api/getAll', (req,res) =>  {
     services.getAll(req,res);
 });
 
+app.get('/api/getStats', (req,res)=>{
+    services.getStats(req,res);
+})
+
 // An api endpoint that returns a employee based off the id
 app.get('/api/getEmployee/:id', (req,res) =>  {
     services.getEmployee(req,res);
@@ -35,11 +39,10 @@ app.get('/api/getfields/:name', (req,res)=> {
     services.getFields(req,res);
 })
 
+
 app.post('/api/newEmployee', (req, res) => {
     services.newEmployee(req,res);
 });
-
-
 
 
 // Handles any requests that don't match the ones above

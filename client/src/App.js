@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Departments from './components/Departments';
 import One from './components/One'
 import newEmployee from './components/newEmployee';
+import stat from './components/Statistics'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
           <Route path='/newEmployee' component={newEmployee}/>
           <Route path='/departments' component={Departments}/>
           <Route path='/one' component={One}/>
+          <Route path='/stat' component={stat}/>
         </Switch>
       </div>
     )

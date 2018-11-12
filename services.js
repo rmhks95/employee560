@@ -15,6 +15,24 @@ async function getFields(req,res){
     }
 }
 
+async function getStats(req,res){
+    try{
+        const currently = await sql.query('SELECT Count(*) FROM employee.employee E WHERE E.DateLeft IS NULL');
+        const pastYear = await sql.query('SELECT Count(*) FROM employee.employee E WHERE E.DateStarted > DATEADD(year,-1,GETDATE())')
+        const countries = await sql.query('SELECT Count(*) FROM employee.Country')
+        
+        const info ={
+            "currently": currently["recordset"][0][''],
+            "pastYear": pastYear["recordset"][0][''],
+            "countries":countries["recordset"][0]['']
+        }
+        res.json(info)
+    }catch(err){
+        console.log(err)
+        res.send().status(500)
+    }
+
+}
 
 function getAll(req,res){
   var list = ["item1","item2", "item3"];
@@ -78,4 +96,4 @@ async function newEmployee(req,res){
 
 
 
-module.exports = {getAll, getEmployee, custom, newEmployee,getFields}
+module.exports = {getAll, getEmployee, custom, newEmployee,getFields, getStats}
