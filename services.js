@@ -4,8 +4,9 @@ const sql = require('mssql')
 sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
  
 async function getDepartments(req,res){
+    const {name} = req.params;
     try {
-        const result = await sql.query`select * from Employee.Department`
+        const result = await sql.query`select * from Employee.${name}`
         // sql.close()
         res.json(result["recordset"]);
     } catch (err) {

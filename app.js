@@ -17,7 +17,7 @@ app.get('/api/getEmployee/:id', (req,res) =>  {
     services.getEmployee(req,res);
 });
 
-app.get('/api/Departments', (req,res)=> {
+app.get('/api/getfields/:name', (req,res)=> {
     services.getDepartments(req,res);
 })
 
