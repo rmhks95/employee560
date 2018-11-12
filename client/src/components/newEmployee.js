@@ -33,7 +33,7 @@ class newEmployee extends Component {
         department: document.getElementById("department").value
     }
 
-    fetch('http://localhost:5000/api/newEmployee/',{
+    fetch('https://560project.azurewebsites.net/api/newEmployee/',{
         method: 'POST',
         body: JSON.stringify(newEmployee),
         headers:{
