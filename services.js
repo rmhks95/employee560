@@ -3,10 +3,13 @@ const sql = require('mssql')
 
 sql.connect('mssql://grp23:Wildcats111@cis560.database.windows.net/Employee?encrypt=true')
  
-async function getDepartments(req,res){
+async function getFields(req,res){
     const {name} = req.params;
     try {
-        const result = await sql.query`select * from Employee.${name}`
+        console.log(name)
+        query = `select * from Employee.${name}`
+        console.log(query)
+        const result = await sql.query(query)
         // sql.close()
         res.json(result["recordset"]);
     } catch (err) {
@@ -71,4 +74,4 @@ async function newEmployee(req,rest){
 
 
 
-module.exports = {getAll, getEmployee, custom, newEmployee,getDepartments}
+module.exports = {getAll, getEmployee, custom, newEmployee,getFields}

@@ -18,7 +18,7 @@ app.get('/api/getEmployee/:id', (req,res) =>  {
 });
 
 app.get('/api/getfields/:name', (req,res)=> {
-    services.getDepartments(req,res);
+    services.getFields(req,res);
 })
 
 app.post('/api/newEmployee', (req, res) => {

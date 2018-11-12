@@ -16,7 +16,7 @@ class Departments extends Component {
 
   // Retrieves the list of items from the Express app
   getList = () => {
-    fetch('https://560project.azurewebsites.net/api/departments')
+    fetch('https://560project.azurewebsites.net/api/getfields/department')
     .then(res => res.json())
     .then(info => {
       var depts = [];
