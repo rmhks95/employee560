@@ -18,7 +18,7 @@ class Stats extends Component {
 
   // Retrieves the list of items from the Express app
   getStats(){
-    fetch('http://localhost:5000/api/getStats/')
+    fetch('https://560project.azurewebsites.net/api/getStats/')
     .then(res => res.json())
     .then(stat => { 
         this.setState({idNum:stat})
