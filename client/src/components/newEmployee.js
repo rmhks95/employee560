@@ -30,7 +30,8 @@ class newEmployee extends Component {
         email: document.getElementById("email").value,
         position: document.getElementById("position").value,
         office: document.getElementById("office").value,
-        department: document.getElementById("department").value
+        department: document.getElementById("department").value,
+        supervisor: document.getElementById("supervisor").value
     }
 
     fetch('https://560project.azurewebsites.net/api/newEmployee/',{
@@ -50,6 +51,7 @@ class newEmployee extends Component {
             document.getElementById("position").value="";
             document.getElementById("office").value="";
             document.getElementById("department").value="";
+            document.getElementById("supervisor").value = "";
             setTimeout(function () {
                 document.getElementById("alarmmsg").innerHTML = "Employee Added";
             }, 3000);
@@ -58,7 +60,7 @@ class newEmployee extends Component {
             document.getElementById("alarmmsg").innerHTML = ""; 
         }else{
             setTimeout(function () {
-                document.getElementById("alarmmsg").innerHTML = "Failed to Added Employee";
+                document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
             }, 3000);
             
             // Now remove alarmmsg's content.
@@ -116,42 +118,17 @@ class newEmployee extends Component {
       <div className="App">
       <h1>New Employee</h1>
         <h2 id="alarmmsg"></h2>
-      {/* Check to see if any items are found*/}
-        First Name: <input type="text" id="firstName"></input>
-        Last Name: <input type="text" id="lastName"></input>
-        Start Date: <input type="date" id="startDate"></input>
-        Email: <input type="text" id="email"></input>
-        Position: <input id="position" list="positionList"></input><datalist id="positionList"></datalist>
-        Office: <input id="office" list="officeList"></input><datalist id="officeList"></datalist>
-        Department: <input id="department" list="departmentList"></input><datalist id="departmentList"></datalist>
-        <button type="submit" onClick={this.makeEmployee}>Submit</button>
-      {false ? (
-          <div><br></br>
-                <div>
-                {/* Employee: {idNum.map((emp,index)=>{ 
-                  return(
-                    <div>
-                      Name: {emp["FirstName"]} {emp["LastName"]}
-                      <br/>
-                      Started On: {moment(emp["DateStarted"]).format('L')}
-                      <br/>
-                      {emp["DateLeft"]? `Date Left: ${moment(emp["DateLeft"]).format('L')}`:""}
-                      {emp["DateLeft"]?<br/>:""}
-                      Email: {emp["Email"]}
-                      <br/>
-                      Position: {emp["Title"]} in {emp["DepartmentName"]}
-                      <br/>
-                      Office: {emp["RoomNumber"]} in {emp["Building"]}
-                    </div>
-                  )})} */}
-                </div>
-          </div>
-        ) : (
-          <div>
-            {/* <h2>No List Items Found</h2> */}
-          </div>
-        )
-      }
+        <form>
+            First Name: <input type="text" id="firstName" required></input>
+            Last Name: <input type="text" id="lastName" required></input>
+            Start Date: <input type="date" id="startDate" required></input>
+            Email: <input type="text" id="email" required></input>
+            Position: <input id="position" list="positionList" required></input><datalist id="positionList"></datalist>
+            Office: <input id="office" list="officeList" required></input><datalist id="officeList"></datalist>
+            Department: <input id="department" list="departmentList" required></input><datalist id="departmentList"></datalist>
+            Supervisor ID: <input type="text" id="supervisor" required></input>
+            <button type="submit" onClick={this.makeEmployee}>Submit</button>
+        </form>
       </div>
     );
   }

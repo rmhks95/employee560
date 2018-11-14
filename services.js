@@ -78,11 +78,11 @@ async function getEmployee(req, res) {
  }
 
 async function newEmployee(req,res){
-  const {firstName,lastName, startDate, email,position,office, department} = req.body
+  const {firstName,lastName, startDate, email,position,office, department,supervisor} = req.body
   try {
     const officeParts = office.split(' in ');
-    const query = `Insert into Employee.Employee(firstName, lastName, datestarted, email, positionid, officeid, departmentid) 
-    Values('${firstName}','${lastName}','${startDate}','${email}',
+    const query = `Insert into Employee.Employee(firstName, lastName, datestarted, email, positionid, officeid, departmentid,supervisorID) 
+    Values('${firstName}','${lastName}','${startDate}','${email}','${supervisor},
         (select positionID from Employee.Position P where P.Title='${position}'), 
         (select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
         (select departmentID from Employee.Department D where D.Name = '${department}'))`
