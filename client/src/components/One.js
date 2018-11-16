@@ -18,9 +18,10 @@ class One extends Component {
   }
 
   // Retrieves the list of items from the Express app
-  getOne(){
+  getOne(event){
+    event.preventDefault();
     var employeeName = document.getElementById("employeeName").value;
-    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ employeeName)
+    fetch('http://localhost:5000/api/getEmployee/'+ employeeName)
     .then(res => res.json())
     .then(employee => { 
       var list = [];
@@ -29,11 +30,6 @@ class One extends Component {
     }).catch(err=> console.log(err))
   }
 
-  editEmployee(idNum){
-    console.log(idNum)
-    
-    
-  }
 
   render() {
     const { idNum } = this.state;
@@ -41,7 +37,7 @@ class One extends Component {
       <div className="App">
       <h1>Find Employee</h1>
       {/* Check to see if any items are found*/}
-          Enter Employee First and Last Name: <input type="text" id="employeeName"></input>
+          <form>Enter Employee First and Last Name: <input type="text" id="employeeName"></input></form>
         <button type="submit" onClick={this.getOne}>Submit</button>
         
       {idNum.length ? (

@@ -44,6 +44,9 @@ app.post('/api/newEmployee', (req, res) => {
     services.newEmployee(req,res);
 });
 
+app.post('/api/updateEmployee', (req, res) => {
+    services.updateEmployee(req,res);
+});
 
 // Handles any requests that don't match the ones above
 app.get('*', (req,res) =>{

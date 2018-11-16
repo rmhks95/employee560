@@ -27,21 +27,22 @@ class newEmployee extends Component {
     fetch('http://localhost:5000/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => { 
-        console.log(employee)
+        console.log(employee[0])
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
-        document.getElementById("startDate").value = employee[0]["DateStarted"]
+        document.getElementById("startDate").value = moment(employee[0]["DateStarted"]).format("YYYY-MM-DD")
         document.getElementById("email").value = employee[0]["Email"]
         document.getElementById("position").value = employee[0]["Title"]
         document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
         document.getElementById("department").value = employee[0]["DepartmentName"]
-        document.getElementById("supervisor").value = employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
+        document.getElementById("supervisor").value = employee[0]["SupervisorID"]
     }).catch(err=> console.log(err))
   }
 
   // Retrieves the list of items from the Express app
   makeEmployee(){
     var newEmployee = {
+        idNum: this.state.idNum,
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
         startDate: document.getElementById("startDate").value,
@@ -51,45 +52,83 @@ class newEmployee extends Component {
         department: document.getElementById("department").value,
         supervisor: document.getElementById("supervisor").value
     }
+    console.log(this.state.idNum)
+    if(this.state.idNum==="0"){
+        fetch('https://560project.azurewebsites.net/api/newEmployee/',{
+            method: 'POST',
+            body: JSON.stringify(newEmployee),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(info => {
+            if(info.code !== "EREQUEST"){
+                document.getElementById("firstName").value="";
+                document.getElementById("lastName").value="";
+                document.getElementById("startDate").value="";
+                document.getElementById("email").value="";
+                document.getElementById("position").value="";
+                document.getElementById("office").value="";
+                document.getElementById("department").value="";
+                document.getElementById("supervisor").value = "";
+                setTimeout(function () {
+                    document.getElementById("alarmmsg").innerHTML = "Employee Added";
+                }, 3000);
+                
+                // Now remove alarmmsg's content.
+                document.getElementById("alarmmsg").innerHTML = ""; 
+            }else{
+                setTimeout(function () {
+                    document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
+                }, 3000);
+                
+                // Now remove alarmmsg's content.
+                document.getElementById("alarmmsg").innerHTML = ""; 
+            }
+        })
+        .catch(err=> {
+            console.log(err)
+        
+        })
+    }else{
+        console.log(newEmployee)
+        fetch('http://localhost:5000/api/updateEmployee/',{
+            method: 'POST',
+            body: JSON.stringify(newEmployee),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(info => {
+            if(info.code !== "EREQUEST"){
+                document.getElementById("firstName").value="";
+                document.getElementById("lastName").value="";
+                document.getElementById("startDate").value="";
+                document.getElementById("email").value="";
+                document.getElementById("position").value="";
+                document.getElementById("office").value="";
+                document.getElementById("department").value="";
+                document.getElementById("supervisor").value = "";
+                setTimeout(function () {
+                    document.getElementById("alarmmsg").innerHTML = "Employee Updated";
+                }, 3000);
+                
+                // Now remove alarmmsg's content.
+                document.getElementById("alarmmsg").innerHTML = ""; 
+            }else{
+                setTimeout(function () {
+                    document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
+                }, 3000);
+                
+                // Now remove alarmmsg's content.
+                document.getElementById("alarmmsg").innerHTML = ""; 
+            }
+        })
+    }
+}
 
-    fetch('https://560project.azurewebsites.net/api/newEmployee/',{
-        method: 'POST',
-        body: JSON.stringify(newEmployee),
-        headers:{
-            'Content-Type': 'application/json'
-          }
-      })
-    .then(res => res.json())
-    .then(info => {
-        if(info.code !== "EREQUEST"){
-            document.getElementById("firstName").value="";
-            document.getElementById("lastName").value="";
-            document.getElementById("startDate").value="";
-            document.getElementById("email").value="";
-            document.getElementById("position").value="";
-            document.getElementById("office").value="";
-            document.getElementById("department").value="";
-            document.getElementById("supervisor").value = "";
-            setTimeout(function () {
-                document.getElementById("alarmmsg").innerHTML = "Employee Added";
-            }, 3000);
-            
-            // Now remove alarmmsg's content.
-            document.getElementById("alarmmsg").innerHTML = ""; 
-        }else{
-            setTimeout(function () {
-                document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
-            }, 3000);
-            
-            // Now remove alarmmsg's content.
-            document.getElementById("alarmmsg").innerHTML = ""; 
-        }
-    })
-    .catch(err=> {
-        console.log(err)
-       
-    })
-  }
 
     // Retrieves the list of items from the Express app
     getDepts = () => {
@@ -136,7 +175,6 @@ class newEmployee extends Component {
       <div className="App">
       <h1>New Employee</h1>
         <h2 id="alarmmsg"></h2>
-        <form>
             First Name: <input type="text" id="firstName" required></input>
             Last Name: <input type="text" id="lastName" required></input>
             Start Date: <input type="date" id="startDate" required></input>
@@ -146,7 +184,7 @@ class newEmployee extends Component {
             Department: <input id="department" list="departmentList" required></input><datalist id="departmentList"></datalist>
             Supervisor ID: <input type="text" id="supervisor" required></input>
             <button type="submit" onClick={this.makeEmployee}>Submit</button>
-        </form>
+
       </div>
     );
   }
