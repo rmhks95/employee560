@@ -173,7 +173,7 @@ class newEmployee extends Component {
   render() {
     return (
       <div className="App">
-      <h1>New Employee</h1>
+      <h1>{this.state.idNum==="0"?"New Employee":"Update Employee"}</h1>
         <h2 id="alarmmsg"></h2>
             First Name: <input type="text" id="firstName" required></input>
             Last Name: <input type="text" id="lastName" required></input>
