@@ -21,7 +21,7 @@ class One extends Component {
   getOne(event){
     event.preventDefault();
     var employeeName = document.getElementById("employeeName").value;
-    fetch('http://localhost:5000/api/getEmployee/'+ employeeName)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ employeeName)
     .then(res => res.json())
     .then(employee => { 
       var list = [];

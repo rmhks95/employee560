@@ -24,7 +24,7 @@ class newEmployee extends Component {
   }
 
   findPerson(){
-    fetch('http://localhost:5000/api/getEmployee/'+ this.state.idNum)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => { 
         console.log(employee[0])
@@ -93,7 +93,7 @@ class newEmployee extends Component {
         })
     }else{
         console.log(newEmployee)
-        fetch('http://localhost:5000/api/updateEmployee/',{
+        fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
             method: 'POST',
             body: JSON.stringify(newEmployee),
             headers:{
