@@ -42,11 +42,12 @@ function getAll(req,res){
 async function getEmployee(req, res) {
   try {
     const {name} = req.params;
+    var result =""
     if(name.includes(" ")){
         var names = name.split(" ");
-        // const result =""
+        
         // const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
-        const result = await sql.query(`
+        result = await sql.query(`
         E.EmployeeId,
         E.Email,
         P.Title,
@@ -59,26 +60,29 @@ async function getEmployee(req, res) {
             INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
         where  E.FirstName= '${names[0]}' and E.LastName = '${names[1]}'`)
     }else{
-        const result = await sql.query(`
+        result = await sql.query(` select 
         E.FirstName,
         E.LastName,
         E.Email,
+        E.DateStarted,
         P.Title,
         O.Building,
         O.RoomNumber,
-        D.Name as DepartmentName
+        D.Name as DepartmentName,
+        (select firstName from employee.employee M where M.employeeId=E.supervisorID)as SupFirst,
+        (select lastName from employee.employee M where M.employeeId=E.supervisorID)as SupLast
         from Employee.Employee E
             INNER JOIN Employee.Position P on E.PositionID = P.PositionID
             INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
             INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
-        where and E.EmployeeId = ${name}`)
+        where E.employeeID =${name}`)
     }
       // console.log(result)
 
     res.json(result["recordset"])
     
   } catch (err) {
-      // ... error checks
+      console.log(err)
   }
   res.json(list);
 }
@@ -89,10 +93,10 @@ async function newEmployee(req,res){
   try {
     const officeParts = office.split(' in ');
     const query = `Insert into Employee.Employee(firstName, lastName, datestarted, email, positionid, officeid, departmentid,supervisorID) 
-    Values('${firstName}','${lastName}','${startDate}','${email}','${supervisor},
+    Values('${firstName}','${lastName}','${startDate}','${email}',
         (select positionID from Employee.Position P where P.Title='${position}'), 
         (select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
-        (select departmentID from Employee.Department D where D.Name = '${department}'))`
+        (select departmentID from Employee.Department D where D.Name = '${department}')),'${supervisor}`
     const result = await sql.query(query)
     res.json(result)
   } catch (err) {

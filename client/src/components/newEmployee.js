@@ -23,6 +23,22 @@ class newEmployee extends Component {
     if(this.state.idNum!=="0")this.findPerson();
   }
 
+  findPerson(){
+    fetch('http://localhost:5000/api/getEmployee/'+ this.state.idNum)
+    .then(res => res.json())
+    .then(employee => { 
+        console.log(employee)
+        document.getElementById("firstName").value = employee[0]["FirstName"]
+        document.getElementById("lastName").value = employee[0]["LastName"]
+        document.getElementById("startDate").value = employee[0]["DateStarted"]
+        document.getElementById("email").value = employee[0]["Email"]
+        document.getElementById("position").value = employee[0]["Title"]
+        document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
+        document.getElementById("department").value = employee[0]["DepartmentName"]
+        document.getElementById("supervisor").value = employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
+    }).catch(err=> console.log(err))
+  }
+
   // Retrieves the list of items from the Express app
   makeEmployee(){
     var newEmployee = {
