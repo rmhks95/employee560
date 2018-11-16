@@ -37,7 +37,7 @@ class One extends Component {
       <div className="App">
       <h1>Find Employee</h1>
       {/* Check to see if any items are found*/}
-          <form>Enter Employee First and Last Name: <input type="text" id="employeeName"></input></form>
+          Enter Employee First and Last Name: <input type="text" id="employeeName"></input>
         <button type="submit" onClick={this.getOne}>Submit</button>
         
       {idNum.length ? (
@@ -57,8 +57,8 @@ class One extends Component {
                       Position: {emp["Title"]} in {emp["DepartmentName"]}
                       <br/>
                       Office: {emp["RoomNumber"]} in {emp["Building"]}
-                      
-                      <Link to={`newEmployee/${emp["EmployeeId"]}`}>{emp["EmployeeId"]}</Link>
+                      <br/>
+                      <Link to={`newEmployee/${emp["EmployeeId"]}`}>Edit Employee</Link>
                     </div>
                     
                   )})}
