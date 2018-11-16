@@ -41,11 +41,13 @@ function getAll(req,res){
 
 async function getEmployee(req, res) {
   try {
-    const {id} = req.params;
+    const {name} = req.params;
+    var names = name.split(" ")
     // const result =""
       // const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
       const result = await sql.query(`select E.FirstName,
       E.LastName,
+      E.EmployeeId,
       E.Email,
       P.Title,
       O.Building,
@@ -55,7 +57,7 @@ async function getEmployee(req, res) {
           INNER JOIN Employee.Position P on E.PositionID = P.PositionID
           INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
           INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
-      where EmployeeId = ${id}`)
+      where  E.FirstName= ${names[0]} and E.LastName = ${names[1]}`)
 
       // console.log(result)
       res.json(result["recordset"])
@@ -65,17 +67,6 @@ async function getEmployee(req, res) {
   res.json(list);
 }
 
- async function custom(req,res){
-//   const {query} = req.body;
-//   try {
-//     // const result =""
-//     const result = await sql.query(query)
-//     console.log(result)
-//     res.json(result)
-//   } catch (err) {
-//       // ... error checks
-//   }
- }
 
 async function newEmployee(req,res){
   const {firstName,lastName, startDate, email,position,office, department,supervisor} = req.body
@@ -96,4 +87,4 @@ async function newEmployee(req,res){
 
 
 
-module.exports = {getAll, getEmployee, custom, newEmployee,getFields, getStats}
+module.exports = {getAll, getEmployee, newEmployee,getFields, getStats}

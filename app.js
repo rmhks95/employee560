@@ -31,7 +31,7 @@ app.get('/api/getStats', (req,res)=>{
 })
 
 // An api endpoint that returns a employee based off the id
-app.get('/api/getEmployee/:id', (req,res) =>  {
+app.get('/api/getEmployee/:name', (req,res) =>  {
     services.getEmployee(req,res);
 });
 
