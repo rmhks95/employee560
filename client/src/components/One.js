@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 class One extends Component {
@@ -28,21 +29,28 @@ class One extends Component {
     }).catch(err=> console.log(err))
   }
 
+  editEmployee(idNum){
+    console.log(idNum)
+    
+    
+  }
+
   render() {
     const { idNum } = this.state;
     return (
       <div className="App">
       <h1>Find Employee</h1>
       {/* Check to see if any items are found*/}
-        Enter Employee Name: <input type="text" id="employeeName"></input>
+          Enter Employee First and Last Name: <input type="text" id="employeeName"></input>
         <button type="submit" onClick={this.getOne}>Submit</button>
+        
       {idNum.length ? (
           <div><br></br>
-                <div>
-                Employee: {idNum.map((emp,index)=>{ 
+                <div >
+                {idNum.map((emp,index)=>{ 
                   return(
-                    <div>
-                      Name: {emp["FirstName"]} {emp["LastName"]}
+                    <div key={index} style={{marginBottom:"10px"}}>
+                      ID: {emp["EmployeeId"]} 
                       <br/>
                       Started On: {moment(emp["DateStarted"]).format('L')}
                       <br/>
@@ -53,7 +61,10 @@ class One extends Component {
                       Position: {emp["Title"]} in {emp["DepartmentName"]}
                       <br/>
                       Office: {emp["RoomNumber"]} in {emp["Building"]}
+                      
+                      <Link to={`newEmployee/${emp["EmployeeId"]}`}>{emp["EmployeeId"]}</Link>
                     </div>
+                    
                   )})}
                 </div>
           </div>

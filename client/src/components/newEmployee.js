@@ -6,7 +6,8 @@ class newEmployee extends Component {
   constructor(props){
     super(props);
     this.state = {
-      idNum: []
+      idNum: this.props.match.params.idNum
+
     }
     this.makeEmployee = this.makeEmployee.bind(this);
     this.getDepts = this.getDepts.bind(this);
@@ -19,6 +20,7 @@ class newEmployee extends Component {
     this.getDepts();
     this.getOffices();
     this.getPositions();
+    if(this.state.idNum!=="0")this.findPerson();
   }
 
   // Retrieves the list of items from the Express app
