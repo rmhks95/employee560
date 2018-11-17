@@ -46,7 +46,7 @@ async function getEmployee(req, res) {
     if(name.includes(" ")){
         var names = name.split(" ");
         
-        // const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
+        //const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
         result = await sql.query(`select
         E.EmployeeId,
         E.Email,
@@ -70,11 +70,8 @@ async function getEmployee(req, res) {
         O.Building,
         O.RoomNumber,
         D.Name as DepartmentName,
-        E.SupervisorID,
-        M.FirstName as SupFirst,
-        M.LastName as SupLast 
+        E.SupervisorID
         from Employee.Employee E
-            Inner join employee.employee M on E.EmployeeID=M.supervisorId
             INNER JOIN Employee.Position P on E.PositionID = P.PositionID
             INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
             INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
