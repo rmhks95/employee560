@@ -54,7 +54,7 @@ async function getEmployee(req, res) {
         O.Building,
         O.RoomNumber,
         D.Name as DepartmentName,
-        E.SupervisorID
+        E.SupervisorID,
         from Employee.Employee E
             INNER JOIN Employee.Position P on E.PositionID = P.PositionID
             INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
@@ -70,8 +70,11 @@ async function getEmployee(req, res) {
         O.Building,
         O.RoomNumber,
         D.Name as DepartmentName,
-        E.SupervisorID
+        E.SupervisorID,
+        M.FirstName as SupFirst,
+        M.LastName as SupLast 
         from Employee.Employee E
+            Inner join employee.employee M on E.EmployeeID=M.supervisorId
             INNER JOIN Employee.Position P on E.PositionID = P.PositionID
             INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
             INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 

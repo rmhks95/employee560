@@ -35,7 +35,10 @@ class newEmployee extends Component {
         document.getElementById("position").value = employee[0]["Title"]
         document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
         document.getElementById("department").value = employee[0]["DepartmentName"]
-        document.getElementById("supervisor").value = employee[0]["SupervisorID"]
+        var supervisor = document.getElementById("supervisor")
+        supervisor.value = employee[0]["SupervisorID"]
+        supervisor.title= employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
+        supervisor.alt = employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
     }).catch(err=> console.log(err))
   }
 
