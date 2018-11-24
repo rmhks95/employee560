@@ -43,25 +43,49 @@ async function getEmployee(req, res) {
   try {
     const {name} = req.params;
     var result =""
-    if(name.includes(" ")){
-        var names = name.split(" ");
-        
-        //const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
-        result = await sql.query(`select
-        E.EmployeeId,
-        E.Email,
-        P.Title,
-        O.Building,
-        O.RoomNumber,
-        D.Name as DepartmentName,
-        E.SupervisorID
-        from Employee.Employee E
-            INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-            INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-            INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
-        where  E.FirstName= '${names[0]}' and E.LastName = '${names[1]}'`)
+
+    if(name.match(/\d+/g)){
+        if(name.includes(" ")){
+            var names = name.split(" ");
+            
+            //const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
+            result = await sql.query(`select
+            E.EmployeeId,
+            E.FirstName,
+            E.LastName,
+            E.Email,
+            E.DateStarted,
+            P.Title,
+            O.Building,
+            O.RoomNumber,
+            D.Name as DepartmentName,
+            E.SupervisorID
+            from Employee.Employee E
+                INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+                INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+            where  E.FirstName= '${names[0]}' and E.LastName = '${names[1]}'`)
+        }{
+            result = await sql.query(`select
+            E.EmployeeId,
+            E.FirstName,
+            E.LastName,
+            E.Email,
+            E.DateStarted,
+            P.Title,
+            O.Building,
+            O.RoomNumber,
+            D.Name as DepartmentName,
+            E.SupervisorID
+            from Employee.Employee E
+                INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+                INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+            where  E.FirstName= '${name}' or E.LastName = '${name}'`)
+        }
     }else{
-        result = await sql.query(`select 
+        result = await sql.query(`select
+        E.EmployeeId, 
         E.FirstName,
         E.LastName,
         E.Email,
@@ -75,7 +99,7 @@ async function getEmployee(req, res) {
             INNER JOIN Employee.Position P on E.PositionID = P.PositionID
             INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
             INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
-        where E.employeeID =${name}`)
+        where E.employeeID = ${name}`)
     }
       // console.log(result)
 
@@ -109,12 +133,13 @@ async function newEmployee(req,res){
 
   async function updateEmployee(req,res){
     try{
-        const {idNum,firstName,lastName, startDate, email,position,office, department,supervisor} = req.body
+        const {idNum,firstName,lastName, startDate, dateEnded, email, position, office, department,supervisor} = req.body
         const officeParts = office.split(' in ');
         const query = `Update  Employee.Employee
             SET FirstName='${firstName}',
             LastName='${lastName}',
             dateStarted='${startDate}',
+            dateEnded = ${dateEnded},
             email='${email}',
             positionid=(select positionID from Employee.Position P where P.Title='${position}'), 
             officeid=(select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
