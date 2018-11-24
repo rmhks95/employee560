@@ -120,8 +120,7 @@ class newEmployee extends Component {
         })
     }else{
         console.log(newEmployee)
-        //fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
-        fetch('http://localhost:5000/api/updateEmployee/',{
+        fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
             method: 'POST',
             body: JSON.stringify(newEmployee),
             headers:{
