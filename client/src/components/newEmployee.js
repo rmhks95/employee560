@@ -182,16 +182,72 @@ class newEmployee extends Component {
       <Nav></Nav>
       <h1>{this.state.idNum==="0"?"New Employee":"Update Employee"}</h1>
         <h2 id="alarmmsg"></h2>
-            First Name: <input type="text" id="firstName" required></input>
-            Last Name: <input type="text" id="lastName" required></input>
-            Start Date: <input type="date" id="startDate" required></input>
-            {this.state.idNum!=="0" ? <div>Date Left: <input type="date" id="dateLeft"></input></div>: ""}
-            Email: <input type="text" id="email" required></input>
-            Position: <input id="position" list="positionList" required></input><datalist id="positionList"></datalist>
-            Office: <input id="office" list="officeList" required></input><datalist id="officeList"></datalist>
-            Department: <input id="department" list="departmentList" required></input><datalist id="departmentList"></datalist>
-            Supervisor ID: <input type="text" id="supervisor" required></input>
-            <button type="submit" onClick={this.makeEmployee}>Submit</button>
+            <div className="input-container">
+              <div className="input-title">
+                <div>First Name:</div>
+              </div>
+                <input type="text" id="firstName" className="input-result" required></input>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Last Name:</div>
+              </div>
+                <input type="text" id="lastName" className="input-result" required></input>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Start Date:</div>
+              </div>
+                <input type="date" id="startDate" className="input-result" required></input>
+            </div>
+
+            {this.state.idNum!=="0" ?
+                <div className="input-container">
+                  <div className="input-title">
+                    <div>Date Left:</div>
+                  </div>
+                    <input type="date" id="dateLeft" className="input-result"></input>
+                </div>: ""
+            }
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Email:</div>
+              </div>
+                <input type="text" id="email" className="input-result" required></input>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Position:</div>
+              </div>
+                <input id="position" className="input-result" list="positionList" required></input><datalist id="positionList"></datalist>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Office:</div>
+              </div>
+                <input id="office" className="input-result" list="officeList" required></input><datalist id="officeList"></datalist>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Department:</div>
+              </div>
+                <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
+            </div>
+
+            <div className="input-container">
+              <div className="input-title">
+                <div>Supervisor ID:</div>
+              </div>
+                <input type="text" id="supervisor" className="input-result" required></input>
+            </div>
+
+            <button className="general-button" type="submit" onClick={this.makeEmployee}>SUBMIT</button>
 
       </div>
     );

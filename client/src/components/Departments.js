@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
+import './Departments.css';
 
 class Departments extends Component {
   // Initialize the state
@@ -37,7 +38,16 @@ class Departments extends Component {
           <div>
             {/* Render the list of items */}
                 <div>
-                  {list.map((dept,index)=><div key={index}>{dept["Name"]} - {dept["Description"]}</div>)}
+                  {list.map((dept,index)=>
+                    <div key={index} className="depart-container">
+                        <div className="depart-title">
+                            <p>{dept["Name"]} - </p>
+                        </div>
+                        <div className="depart-result">
+                          <p> {dept["Description"]}</p>
+                        </div>
+                    </div>
+                  )}
                 </div>
           </div>
         ) : (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Nav from './Nav';
+import './Statistics.css';
 
 class Stats extends Component {
   // Initialize the state
@@ -32,14 +33,14 @@ class Stats extends Component {
       <Nav></Nav>
         <h1>Company Stats</h1>
           <div><br></br>
-                <div>
-                    Current Employee: {idNum["currently"]}
+                <div className="stats-container">
+                    <div className="stats-title">Current Employee: </div><div className="stats-result">{idNum["currently"]}</div>
                 </div>
-                <div>
-                    Hired Employee over the last year: {idNum["pastYear"]}
+                <div className="stats-container">
+                    <div className="stats-title">Hired Employee over the last year: </div><div className="stats-result">{idNum["pastYear"]}</div>
                 </div>
-                <div>
-                    Number of Countries that we have offices in: {idNum["countries"]}
+                <div className="stats-container">
+                    <div className="stats-title">Number of Countries that we have offices in: </div><div className="stats-result">{idNum["countries"]}</div>
                 </div>
           </div>
       </div>

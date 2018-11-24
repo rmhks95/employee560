@@ -67,3 +67,57 @@ h1{
     transform: rotate(360deg);
   }
 }
+
+
+.general-button{;
+  height: 50px;
+  background-color: #ffcc00;
+  border: none;
+  margin: 10px;
+  padding: 15px;
+  color: white;
+  font-weight: bold;
+  width: 150px;
+  font-size: 18px;
+}
+
+.input-title{
+  width:35%;
+  display: inline-table;
+  height: 30px;
+  box-sizing: border-box;
+  background-color: #dddddd;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  left:0;
+  top: 0;
+}
+
+.input-title div{
+  right: 5px;
+  display: table-cell;
+  text-align: right;
+  padding-right: 8px;
+  vertical-align: middle;
+}
+
+.input-result{
+  width: 65%;
+  box-sizing: border-box;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  padding-left: 8px;
+  position: absolute;
+  right:0;
+  top: 0;
+}
+
+.input-container{
+  width: 600px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 15px;
+}

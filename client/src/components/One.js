@@ -40,9 +40,15 @@ class One extends Component {
       <div className="App">
           <Nav></Nav>
           <h1>Find Employee</h1>
+
           {/* Check to see if any items are found*/}
-              Enter Name or ID: <input type="text" id="employeeName"></input>
-            <button type="submit" onClick={this.getOne}>Submit</button>
+          <div className="input-container">
+            <div className="input-title">
+              <div>Enter Name or ID:</div>
+            </div>
+              <input type="text" id="employeeName" className="input-result"></input>
+          </div>
+          <button className="general-button" type="submit" onClick={this.getOne}>SEARCH</button>
 
           <div id="one-list">
               {idNum.length ? (
