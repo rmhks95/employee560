@@ -1,3 +1,47 @@
 #one-list{
   display: none;
 }
+
+.result{
+
+}
+
+.title{
+  color: black;
+  font-weight: bold;
+}
+
+.one-employee{
+  background-color: white;
+  width: 380px;
+  height: 180px;
+  overflow: hidden;
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+}
+
+#one-titles{
+  width: 35%;
+  text-align: right;
+  display: inline-block;
+  padding: 10px 0;
+}
+
+#one-results{
+  width:65%;
+  text-align: left;
+  display: inline-block;
+  padding: 10px 0;
+}
+
+.one-edit{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffcc00;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+}
