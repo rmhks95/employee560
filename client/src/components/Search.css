@@ -19,3 +19,20 @@
 #search-button:hover{
   cursor: pointer;
 }
+
+#search-close{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-image: url(./assets/close.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  z-index: 1001;
+}
+
+#search-close:hover{
+  cursor: pointer;
+}

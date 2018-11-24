@@ -12,6 +12,7 @@ class One extends Component {
     }
     this.getOne = this.getOne.bind(this);
     this.selectSuper = this.selectSuper.bind(this);
+    this.searchClose = this.searchClose.bind(this);
   }
 
   // Fetch the list on first mount
@@ -21,6 +22,10 @@ class One extends Component {
 
   selectSuper(id){
     document.getElementById("supervisor").value = id;
+    document.getElementById("search-popup").style.display = "none";
+  }
+
+  searchClose(){
     document.getElementById("search-popup").style.display = "none";
   }
 
@@ -43,6 +48,7 @@ class One extends Component {
     const { idNum } = this.state;
     return (
       <div className="App" id="search-popup">
+        <div id="search-close" onClick={this.searchClose}></div>
           {/* Check to see if any items are found*/}
           <div className="input-container">
             <div className="input-title">
