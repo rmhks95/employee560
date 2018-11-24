@@ -60,6 +60,8 @@ class One extends Component {
                               <div id="one-titles">
                                   <span className="title">ID: </span>
                                   <br/>
+                                  <span className="title">Name: </span>
+                                  <br/>
                                   <span className="title">Started On: </span>
                                   <br/>
                                   <span className="title">{emp["DateLeft"]? `Date Left: `:""}</span>
@@ -73,6 +75,8 @@ class One extends Component {
                               </div>
                               <div id="one-results">
                                   <span className="result">{emp["EmployeeId"]}</span>
+                                  <br/>
+                                  <span className="result">{emp["FirstName"]} {emp["LastName"]}</span>
                                   <br/>
                                   <span className="result">{moment(emp["DateStarted"]).format('L')}</span>
                                   <br/>
