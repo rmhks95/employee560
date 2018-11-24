@@ -13,7 +13,7 @@
 
 .one-employee{
   background-color: white;
-  width: 380px;
+  width: 440px;
   height: 180px;
   overflow: hidden;
   display: inline-block;
@@ -26,6 +26,7 @@
   text-align: right;
   display: inline-block;
   padding: 10px 0;
+  height: 180px;
 }
 
 #one-results{
@@ -33,6 +34,7 @@
   text-align: left;
   display: inline-block;
   padding: 10px 0;
+  height: 180px;
 }
 
 .one-edit{
