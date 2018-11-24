@@ -124,7 +124,7 @@ async function newEmployee(req,res){
         (select positionID from Employee.Position P where P.Title='${position}'), 
         (select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
         (select departmentID from Employee.Department D where D.Name = '${department}'),
-        '${supervisor?supervisor:null}')`
+        ${supervisor?`${supervisor}`:null})`
     const result = await sql.query(query)
     res.json(result)
   } catch (err) {
