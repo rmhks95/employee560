@@ -6,7 +6,32 @@
 #site-wrap{
   width: 100%;
   max-width: 1200px;
+  min-width: 600px;
   position: relative;
+  margin-top: 20px;
+}
+
+#white-bar{
+  position:absolute;
+  top:0;
+  right: 0;
+  left: 0;
+  height: 90px;
+  background-color: white;
+  border-bottom: 2px solid #dddddd;
+}
+
+#site{
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #f1f3f4;
+  position: absolute;
+}
+
+h1{
+  margin-bottom: 50px;
 }
 
 .App {

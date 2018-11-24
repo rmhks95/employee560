@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import './Home.css';
 
 class Home extends Component {
   render() {
@@ -8,26 +8,29 @@ class Home extends Component {
     <div className="App">
       <h1>Project Home</h1>
       {/* Link to List.js */}
-      <Link to={'./departments'}>
-        <button variant="raised">
-            Department List
-        </button>
-      </Link>
-      <Link to={'./one'}>
-        <button variant="raised">
-            One employee
-        </button>
-      </Link>
-      <Link to={'./newEmployee/0'}>
-        <button variant="raised">
-           New Employee
-        </button>
-      </Link>
-      <Link to={'./stat'}>
-        <button variant="raised">
-           Statistics
-        </button>
-      </Link>
+      <div id="home-wrap">
+          <Link to={'./departments'}>
+            <button variant="raised">
+                Department List
+            </button>
+          </Link>
+          <Link to={'./one'}>
+            <button variant="raised">
+                One employee
+            </button>
+          </Link>
+          <br/>
+          <Link to={'./newEmployee/0'}>
+            <button variant="raised">
+               New Employee
+            </button>
+          </Link>
+          <Link to={'./stat'}>
+            <button variant="raised">
+               Statistics
+            </button>
+          </Link>
+      </div>
     </div>
     );
   }
