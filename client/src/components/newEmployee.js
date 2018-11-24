@@ -51,7 +51,8 @@ class newEmployee extends Component {
   }
 
   // Retrieves the list of items from the Express app
-  makeEmployee(){
+  makeEmployee(event ){
+      event.preventDefault()
     var newEmployee = {
         idNum: this.state.idNum,
         firstName: document.getElementById("firstName").value,
@@ -64,12 +65,13 @@ class newEmployee extends Component {
         supervisor: document.getElementById("supervisor").value
     }
     if(this.state.idNum != "0"){
+        
       newEmployee = {
           idNum: this.state.idNum,
           firstName: document.getElementById("firstName").value,
           lastName: document.getElementById("lastName").value,
           startDate: document.getElementById("startDate").value,
-          lastDate:document.getElementById("dateLeft").value,
+          lastDate: document.getElementById("dateLeft").value,
           email: document.getElementById("email").value,
           position: document.getElementById("position").value,
           office: document.getElementById("office").value,
@@ -88,6 +90,9 @@ class newEmployee extends Component {
         .then(res => res.json())
         .then(info => {
             if(info.code !== "EREQUEST"){
+                setTimeout(function () {
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Employee Added";
+                }, 3000);
                 document.getElementById("firstName").value="";
                 document.getElementById("lastName").value="";
                 document.getElementById("startDate").value="";
@@ -96,14 +101,11 @@ class newEmployee extends Component {
                 document.getElementById("office").value="";
                 document.getElementById("department").value="";
                 document.getElementById("supervisor").value = "";
-                setTimeout(function () {
-                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Employee Added";
-                }, 3000);
+                
 
                 // Now remove alarmmsg's content.
                 document.getElementById("alarmmsg").innerHTML = "";
             }else{
-                console.log(info)
                 setTimeout(function () {
                     if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
@@ -118,7 +120,8 @@ class newEmployee extends Component {
         })
     }else{
         console.log(newEmployee)
-        fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
+        //fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
+        fetch('http://localhost:5000/api/updateEmployee/',{
             method: 'POST',
             body: JSON.stringify(newEmployee),
             headers:{
@@ -128,6 +131,13 @@ class newEmployee extends Component {
         .then(res => res.json())
         .then(info => {
             if(info.code !== "EREQUEST"){
+                document.getElementById("alarmmsg").innerHTML = "Employee Updated";
+
+                // Now remove alarmmsg's content.
+                setTimeout(function () {
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "";
+                }, 3000);
+                
                 document.getElementById("firstName").value="";
                 document.getElementById("lastName").value="";
                 document.getElementById("startDate").value="";
@@ -137,20 +147,18 @@ class newEmployee extends Component {
                 document.getElementById("office").value="";
                 document.getElementById("department").value="";
                 document.getElementById("supervisor").value = "";
-                setTimeout(function () {
-                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Employee Updated";
-                }, 3000);
-
-                // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = "";
-            }else{
                 
-                setTimeout(function () {
-                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
-                }, 3000);
+                
+            }else{
+                document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
 
                 // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = "";
+                setTimeout(function () {
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "";
+                }, 3000);
+
+                
+                
             }
         })
     }
@@ -205,74 +213,75 @@ class newEmployee extends Component {
       <Nav></Nav>
       <h1>{this.state.idNum==="0"?"New Employee":"Update Employee"}</h1>
         <h2 id="alarmmsg"></h2>
+        <form onSubmit={this.makeEmployee}>
             <div className="input-container">
               <div className="input-title">
                 <div>First Name:</div>
-              </div>
-                <input type="text" id="firstName" className="input-result" required></input>
-            </div>
+                </div>
+                    <input type="text" id="firstName" className="input-result" required></input>
+                </div>
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Last Name:</div>
-              </div>
-                <input type="text" id="lastName" className="input-result" required></input>
-            </div>
-
-            <div className="input-container">
-              <div className="input-title">
-                <div>Start Date:</div>
-              </div>
-                <input type="date" id="startDate" className="input-result" required></input>
-            </div>
-
-            {this.state.idNum!=="0" ?
                 <div className="input-container">
-                  <div className="input-title">
-                    <div>Date Left:</div>
-                  </div>
-                    <input type="date" id="dateLeft" className="input-result"></input>
-                </div>: ""
-            }
+                <div className="input-title">
+                    <div>Last Name:</div>
+                </div>
+                    <input type="text" id="lastName" className="input-result" required></input>
+                </div>
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Email:</div>
-              </div>
-                <input type="text" id="email" className="input-result" required></input>
-            </div>
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Start Date:</div>
+                </div>
+                    <input type="date" id="startDate" className="input-result" required></input>
+                </div>
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Position:</div>
-              </div>
-                <input id="position" className="input-result" list="positionList" required></input><datalist id="positionList"></datalist>
-            </div>
+                {this.state.idNum!=="0" ?
+                    <div className="input-container">
+                    <div className="input-title">
+                        <div>Date Left:</div>
+                    </div>
+                        <input type="date" id="dateLeft" className="input-result"></input>
+                    </div>: ""
+                }
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Office:</div>
-              </div>
-                <input id="office" className="input-result" list="officeList" required></input><datalist id="officeList"></datalist>
-            </div>
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Email:</div>
+                </div>
+                    <input type="text" id="email" className="input-result" required></input>
+                </div>
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Department:</div>
-              </div>
-                <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
-            </div>
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Position:</div>
+                </div>
+                    <input id="position" className="input-result" list="positionList" required></input><datalist id="positionList"></datalist>
+                </div>
 
-            <div className="input-container">
-              <div className="input-title">
-                <div>Supervisor ID:</div>
-              </div>
-                <input type="text" id="supervisor" className="input-result" required></input>
-                <div id="search-icon" onClick={this.searchSuper}></div>
-            </div>
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Office:</div>
+                </div>
+                    <input id="office" className="input-result" list="officeList" required></input><datalist id="officeList"></datalist>
+                </div>
 
-            <button className="general-button" type="submit" onClick={this.makeEmployee}>SUBMIT</button>
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Department:</div>
+                </div>
+                    <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
+                </div>
 
+                <div className="input-container">
+                <div className="input-title">
+                    <div>Supervisor ID:</div>
+                </div>
+                    <input type="text" id="supervisor" className="input-result" ></input>
+                    <div id="search-icon" onClick={this.searchSuper}></div>
+                </div>
+                
+                <button className="general-button" type="submit" >SUBMIT</button>
+            </form>
       </div>
       </div>
     );
