@@ -13,3 +13,7 @@
 #search-icon:hover{
   cursor: pointer;
 }
+
+#alarmmsg{
+  margin-bottom: 10px;
+}

@@ -59,12 +59,25 @@ class newEmployee extends Component {
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
         startDate: document.getElementById("startDate").value,
-        dateLeft: document.getElementById("dateLeft").value,
         email: document.getElementById("email").value,
         position: document.getElementById("position").value,
         office: document.getElementById("office").value,
         department: document.getElementById("department").value,
         supervisor: document.getElementById("supervisor").value
+    }
+    if(this.state.idNum != "0"){
+      newEmployee = {
+          idNum: this.state.idNum,
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
+          startDate: document.getElementById("startDate").value,
+          dateLeft: document.getElementById("dateLeft").value,
+          email: document.getElementById("email").value,
+          position: document.getElementById("position").value,
+          office: document.getElementById("office").value,
+          department: document.getElementById("department").value,
+          supervisor: document.getElementById("supervisor").value
+      }
     }
     console.log(this.state.idNum)
     if(this.state.idNum==="0"){
@@ -87,14 +100,14 @@ class newEmployee extends Component {
                 document.getElementById("department").value="";
                 document.getElementById("supervisor").value = "";
                 setTimeout(function () {
-                    document.getElementById("alarmmsg").innerHTML = "Employee Added";
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Employee Added";
                 }, 3000);
 
                 // Now remove alarmmsg's content.
                 document.getElementById("alarmmsg").innerHTML = "";
             }else{
                 setTimeout(function () {
-                    document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
 
                 // Now remove alarmmsg's content.
@@ -120,20 +133,21 @@ class newEmployee extends Component {
                 document.getElementById("firstName").value="";
                 document.getElementById("lastName").value="";
                 document.getElementById("startDate").value="";
+                document.getElementById("dateLeft").value="";
                 document.getElementById("email").value="";
                 document.getElementById("position").value="";
                 document.getElementById("office").value="";
                 document.getElementById("department").value="";
                 document.getElementById("supervisor").value = "";
                 setTimeout(function () {
-                    document.getElementById("alarmmsg").innerHTML = "Employee Updated";
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Employee Updated";
                 }, 3000);
 
                 // Now remove alarmmsg's content.
                 document.getElementById("alarmmsg").innerHTML = "";
             }else{
                 setTimeout(function () {
-                    document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
+                    if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
 
                 // Now remove alarmmsg's content.
