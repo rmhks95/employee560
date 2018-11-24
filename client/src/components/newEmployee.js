@@ -27,11 +27,11 @@ class newEmployee extends Component {
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => { 
-        console.log(employee[0]["dateLeft"])
+        console.log(employee[0]["DateLeft"])
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
         document.getElementById("startDate").value = moment(employee[0]["DateStarted"]).format("YYYY-MM-DD")
-        if(employee[0]["dateLeft"])document.getElementById("dateLeft").value = moment(employee[0]["dateLeft"]).format('YYYY-MM-DD')
+        if(employee[0]["DateLeft"])document.getElementById("dateLeft").value = moment(employee[0]["DateLeft"]).format('YYYY-MM-DD')
         document.getElementById("email").value = employee[0]["Email"]
         document.getElementById("position").value = employee[0]["Title"]
         document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
