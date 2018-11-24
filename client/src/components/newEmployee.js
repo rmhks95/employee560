@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Nav from './Nav';
+import Search from './Search';
+import './newEmployee.css';
 
 class newEmployee extends Component {
   // Initialize the state
@@ -14,6 +16,12 @@ class newEmployee extends Component {
     this.getDepts = this.getDepts.bind(this);
     this.getPositions = this.getPositions.bind(this);
     this.getOffices = this.getOffices.bind(this);
+    this.searchSuper = this.searchSuper.bind(this);
+  }
+
+  //used to search for employeeName
+  searchSuper(){
+    document.getElementById("search-popup").style.display = "block";
   }
 
   // Fetch the list on first mount
@@ -178,6 +186,8 @@ class newEmployee extends Component {
 
   render() {
     return (
+      <div>
+      <Search></Search>
       <div className="App">
       <Nav></Nav>
       <h1>{this.state.idNum==="0"?"New Employee":"Update Employee"}</h1>
@@ -245,10 +255,12 @@ class newEmployee extends Component {
                 <div>Supervisor ID:</div>
               </div>
                 <input type="text" id="supervisor" className="input-result" required></input>
+                <div id="search-icon" onClick={this.searchSuper}></div>
             </div>
 
             <button className="general-button" type="submit" onClick={this.makeEmployee}>SUBMIT</button>
 
+      </div>
       </div>
     );
   }

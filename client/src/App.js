@@ -10,7 +10,8 @@ import stat from './components/Statistics';
 class App extends Component {
   render() {
     const App = () => (
-      <div id="site">
+      <div>
+          <div id="site"></div>
           <div id="white-bar"></div>
           <div id="site-wrap">
             <Switch>

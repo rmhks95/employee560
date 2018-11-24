@@ -1,0 +1,21 @@
+#search-popup{
+  position: absolute;
+  z-index: 1000;
+  background-color: #f1f3f4;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 700px;
+  height: 70vh;
+  min-height: 400px;
+  top: 60px;
+  border: 10px solid white;
+  padding-top: 50px;
+  overflow-y: scroll;
+  display: none;
+}
+
+#search-button:hover{
+  cursor: pointer;
+}

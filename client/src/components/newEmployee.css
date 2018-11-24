@@ -1,0 +1,15 @@
+#search-icon{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url(./assets/search.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 36px;
+}
+
+#search-icon:hover{
+  cursor: pointer;
+}
