@@ -36,7 +36,6 @@ class newEmployee extends Component {
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => {
-        console.log(moment(employee[0]["DateStarted"]).utc().format("YYYY-MMM-DD"))
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
         document.getElementById("startDate").value = moment(employee[0]["DateStarted"]).utc().format("YYYY-MM-DD")
@@ -119,7 +118,6 @@ class newEmployee extends Component {
 
         })
     }else{
-        console.log(newEmployee)
         fetch('https://560project.azurewebsites.net/api/updateEmployee/',{
             method: 'POST',
             body: JSON.stringify(newEmployee),
