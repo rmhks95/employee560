@@ -3,14 +3,15 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import Departments from './components/Departments';
-import One from './components/One'
+import One from './components/One';
 import newEmployee from './components/newEmployee';
-import stat from './components/Statistics'
+import stat from './components/Statistics';
+import Nav from './components/Nav';
 
 class App extends Component {
   render() {
     const App = () => (
-      <div>
+      <div id="site-wrap">
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path='/newEmployee/:idNum' component={newEmployee}/>

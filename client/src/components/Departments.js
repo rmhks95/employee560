@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Nav from './Nav';
 
 class Departments extends Component {
   // Initialize the state
@@ -29,6 +30,7 @@ class Departments extends Component {
     const { list } = this.state;
     return (
       <div className="App">
+        <Nav></Nav>
         <h1>List of Departments</h1>
         {/* Check to see if any items are found*/}
         {list.length ? (

@@ -1,3 +1,14 @@
+*{
+  margin: 0 auto;
+  padding: 0;
+}
+
+#site-wrap{
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+
 .App {
   text-align: center;
 }

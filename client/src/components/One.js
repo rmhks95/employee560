@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import moment from 'moment';
+import Nav from './Nav';
 
 class One extends Component {
   // Initialize the state
@@ -23,7 +24,7 @@ class One extends Component {
     var employeeName = document.getElementById("employeeName").value;
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ employeeName)
     .then(res => res.json())
-    .then(employee => { 
+    .then(employee => {
       var list = [];
       employee.map(info=> list.push(info))
       this.setState({idNum:list})
@@ -35,18 +36,19 @@ class One extends Component {
     const { idNum } = this.state;
     return (
       <div className="App">
+      <Nav></Nav>
       <h1>Find Employee</h1>
       {/* Check to see if any items are found*/}
           Enter Employee First and Last Name: <input type="text" id="employeeName"></input>
         <button type="submit" onClick={this.getOne}>Submit</button>
-        
+
       {idNum.length ? (
           <div><br></br>
                 <div >
-                {idNum.map((emp,index)=>{ 
+                {idNum.map((emp,index)=>{
                   return(
                     <div key={index} style={{marginBottom:"10px"}}>
-                      ID: {emp["EmployeeId"]} 
+                      ID: {emp["EmployeeId"]}
                       <br/>
                       Started On: {moment(emp["DateStarted"]).format('L')}
                       <br/>
@@ -60,7 +62,7 @@ class One extends Component {
                       <br/>
                       <Link to={`newEmployee/${emp["EmployeeId"]}`}>Edit Employee</Link>
                     </div>
-                    
+
                   )})}
                 </div>
           </div>

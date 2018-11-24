@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Nav from './Nav';
 
 class Stats extends Component {
   // Initialize the state
@@ -19,7 +20,7 @@ class Stats extends Component {
   getStats(){
     fetch('https://560project.azurewebsites.net/api/getStats/')
     .then(res => res.json())
-    .then(stat => { 
+    .then(stat => {
         this.setState({idNum:stat})
     }).catch(err=> console.log(err))
   }
@@ -28,6 +29,7 @@ class Stats extends Component {
     const { idNum } = this.state;
     return (
       <div className="App">
+      <Nav></Nav>
         <h1>Company Stats</h1>
           <div><br></br>
                 <div>

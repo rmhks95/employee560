@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import Nav from './Nav';
 
 class newEmployee extends Component {
   // Initialize the state
@@ -26,7 +27,7 @@ class newEmployee extends Component {
   findPerson(){
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
-    .then(employee => { 
+    .then(employee => {
         console.log(employee[0]["DateLeft"])
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
@@ -80,21 +81,21 @@ class newEmployee extends Component {
                 setTimeout(function () {
                     document.getElementById("alarmmsg").innerHTML = "Employee Added";
                 }, 3000);
-                
+
                 // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = ""; 
+                document.getElementById("alarmmsg").innerHTML = "";
             }else{
                 setTimeout(function () {
                     document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
-                
+
                 // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = ""; 
+                document.getElementById("alarmmsg").innerHTML = "";
             }
         })
         .catch(err=> {
             console.log(err)
-        
+
         })
     }else{
         console.log(newEmployee)
@@ -119,16 +120,16 @@ class newEmployee extends Component {
                 setTimeout(function () {
                     document.getElementById("alarmmsg").innerHTML = "Employee Updated";
                 }, 3000);
-                
+
                 // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = ""; 
+                document.getElementById("alarmmsg").innerHTML = "";
             }else{
                 setTimeout(function () {
                     document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
-                
+
                 // Now remove alarmmsg's content.
-                document.getElementById("alarmmsg").innerHTML = ""; 
+                document.getElementById("alarmmsg").innerHTML = "";
             }
         })
     }
@@ -140,7 +141,7 @@ class newEmployee extends Component {
         fetch('https://560project.azurewebsites.net/api/getfields/department')
         .then(res => res.json())
         .then(info => {
-            info.map(depts=> { 
+            info.map(depts=> {
                 var deptList = document.getElementById("departmentList")
                 var newOptionElement = document.createElement("option");
                 newOptionElement.textContent = depts["Name"];
@@ -178,6 +179,7 @@ class newEmployee extends Component {
   render() {
     return (
       <div className="App">
+      <Nav></Nav>
       <h1>{this.state.idNum==="0"?"New Employee":"Update Employee"}</h1>
         <h2 id="alarmmsg"></h2>
             First Name: <input type="text" id="firstName" required></input>
