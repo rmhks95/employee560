@@ -142,7 +142,7 @@ async function newEmployee(req,res){
             SET FirstName='${firstName}',
             LastName='${lastName}',
             dateStarted='${startDate}',
-            dateLeft = ${dateLeft},
+            dateLeft = '${dateLeft}',
             email='${email}',
             positionid=(select positionID from Employee.Position P where P.Title='${position}'), 
             officeid=(select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),
