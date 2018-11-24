@@ -69,11 +69,12 @@ class newEmployee extends Component {
           firstName: document.getElementById("firstName").value,
           lastName: document.getElementById("lastName").value,
           startDate: document.getElementById("startDate").value,
+          lastDate:document.getElementById("dateLeft").value,
           email: document.getElementById("email").value,
           position: document.getElementById("position").value,
           office: document.getElementById("office").value,
           department: document.getElementById("department").value,
-          supervisor: document.getElementById("supervisor")?document.getElementById("supervisor").value:null
+          supervisor: document.getElementById("supervisor").value
       }
     }
     if(this.state.idNum==="0"){
