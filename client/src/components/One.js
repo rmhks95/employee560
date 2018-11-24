@@ -62,32 +62,38 @@ class One extends Component {
                                   <br/>
                                   <span className="title">Name: </span>
                                   <br/>
+                                  <span className="title">Email: </span>
+                                  <br/>
                                   <span className="title">Started On: </span>
                                   <br/>
                                   <span className="title">{emp["DateLeft"]? `Date Left: `:""}</span>
-                                  {emp["DateLeft"]?<br/>:""}
-                                  <span className="title">Email: </span>
-                                  <br/>
-                                  <span className="title">Position: </span>
-                                  <br/>
-                                  <span className="title">Office: </span>
-                                  <br/>
+                                  {emp["DateLeft"]?<br/>:<span>
+                                    <span className="title">Position: </span>
+                                    <br/>
+                                    <span className="title">Office: </span>
+                                    <br/>
+                                  </span>}
+                                  
+                                  
                               </div>
                               <div id="one-results">
                                   <span className="result">{emp["EmployeeId"]}</span>
                                   <br/>
                                   <span className="result">{emp["FirstName"]} {emp["LastName"]}</span>
                                   <br/>
-                                  <span className="result">{moment(emp["DateStarted"]).format('L')}</span>
-                                  <br/>
-                                  <span className="result">{emp["DateLeft"]? `${moment(emp["DateLeft"]).format('L')}`:""}</span>
-                                  {emp["DateLeft"]?<br/>:""}
                                   <span className="result">{emp["Email"]}</span>
                                   <br/>
-                                  <span className="result">{emp["Title"]} in {emp["DepartmentName"]}</span>
+                                  <span className="result">{moment(emp["DateStarted"]).utc().format('L')}</span>
                                   <br/>
-                                  <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
-                                  <br/>
+                                  <span className="result">{emp["DateLeft"]? `${moment(emp["DateLeft"]).utc().format('L')}`:""}</span>
+                                  {emp["DateLeft"]?<br/>:<span>
+                                    <span className="result">{emp["Title"]} in {emp["DepartmentName"]}</span>
+                                    <br/>
+                                    <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
+                                    <br/>
+                                  </span>}
+                                  
+                                  
                               </div>
                               <Link to={`newEmployee/${emp["EmployeeId"]}`}>
                                   <div className="one-edit">
