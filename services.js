@@ -136,13 +136,13 @@ async function newEmployee(req,res){
 
   async function updateEmployee(req,res){
     try{
-        const {idNum,firstName,lastName, startDate, dateEnded, email, position, office, department,supervisor} = req.body
+        const {idNum,firstName,lastName, startDate, dateLeft, email, position, office, department,supervisor} = req.body
         const officeParts = office.split(' in ');
         const query = `Update  Employee.Employee
             SET FirstName='${firstName}',
             LastName='${lastName}',
             dateStarted='${startDate}',
-            dateEnded = ${dateEnded},
+            dateLeft = ${dateLeft},
             email='${email}',
             positionid=(select positionID from Employee.Position P where P.Title='${position}'), 
             officeid=(select officeID from Employee.Office O where O.RoomNumber = '${officeParts[0]}' and O.Building='${officeParts[1]}'),

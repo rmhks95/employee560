@@ -27,10 +27,11 @@ class newEmployee extends Component {
     fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => { 
-        console.log(employee[0])
+        console.log(employee[0]["dateLeft"])
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
         document.getElementById("startDate").value = moment(employee[0]["DateStarted"]).format("YYYY-MM-DD")
+        if(employee[0]["dateLeft"])document.getElementById("dateLeft").value = moment(employee[0]["dateLeft"]).format('YYYY-MM-DD')
         document.getElementById("email").value = employee[0]["Email"]
         document.getElementById("position").value = employee[0]["Title"]
         document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
@@ -49,6 +50,7 @@ class newEmployee extends Component {
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
         startDate: document.getElementById("startDate").value,
+        dateLeft: document.getElementById("dateLeft").value,
         email: document.getElementById("email").value,
         position: document.getElementById("position").value,
         office: document.getElementById("office").value,
@@ -181,6 +183,7 @@ class newEmployee extends Component {
             First Name: <input type="text" id="firstName" required></input>
             Last Name: <input type="text" id="lastName" required></input>
             Start Date: <input type="date" id="startDate" required></input>
+            {this.state.idNum!=="0" ? <div>Date Left: <input type="date" id="dateLeft"></input></div>: ""}
             Email: <input type="text" id="email" required></input>
             Position: <input id="position" list="positionList" required></input><datalist id="positionList"></datalist>
             Office: <input id="office" list="officeList" required></input><datalist id="officeList"></datalist>
