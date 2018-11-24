@@ -11,23 +11,35 @@ class Home extends Component {
       <div id="home-wrap">
           <Link to={'./departments'}>
             <button variant="raised">
-                Department List
+                <div>
+                   <h2>Department List</h2>
+                   <div className="home-icon" id="home-department"></div>
+                </div>
             </button>
           </Link>
           <Link to={'./one'}>
             <button variant="raised">
-                Find Employee(s)
+                <div>
+                   <h2>Find Employee</h2>
+                   <div className="home-icon" id="home-find"></div>
+                </div>
             </button>
           </Link>
           <br/>
           <Link to={'./newEmployee/0'}>
             <button variant="raised">
-               New Employee
+                <div>
+                   <h2>New Employee</h2>
+                   <div className="home-icon" id="home-new"></div>
+                </div>
             </button>
           </Link>
           <Link to={'./stat'}>
             <button variant="raised">
-               Statistics
+                <div>
+                   <h2>Statistics</h2>
+                   <div className="home-icon" id="home-stats"></div>
+                </div>
             </button>
           </Link>
       </div>

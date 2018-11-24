@@ -3,13 +3,75 @@
   height: 250px;
   margin: 20px;
   background-color: white;
-  border: 2px solid #dddddd;
+  border: none;
   font-size: 20px;
   font-weight: bold;
   color: #ffcc00;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
 }
 
 #home-wrap button:hover{
   background-color: #ffcc00;
   color: #000000;
+}
+
+#home-wrap button h2{
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffcc00;
+  color: white;
+  position: absolute;
+  font-size: 20px;
+  padding: 8px 0;
+}
+
+#home-wrap button:hover h2{
+  background-color: white;
+  color: #ffcc00;
+}
+
+.home-icon{
+  background-size: contain;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+button #home-new{
+  background-image: url(./assets/person.png);
+}
+
+button:hover #home-new{
+  background-image: url(./assets/person-h.png);
+}
+
+button #home-find{
+  background-image: url(./assets/persons.png);
+}
+
+button:hover #home-find{
+  background-image: url(./assets/persons-h.png);
+}
+
+button #home-department{
+  background-image: url(./assets/book.png);
+}
+
+button:hover #home-department{
+  background-image: url(./assets/book-h.png);
+}
+
+button #home-stats{
+  background-image: url(./assets/stats.png);
+}
+
+button:hover #home-stats{
+  background-image: url(./assets/stats-h.png);
 }
