@@ -16,7 +16,7 @@ class Home extends Component {
           </Link>
           <Link to={'./one'}>
             <button variant="raised">
-                One employee
+                Find Employee(s)
             </button>
           </Link>
           <br/>

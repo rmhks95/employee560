@@ -1,0 +1,23 @@
+#nav-back-button{
+  height: 50px;
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  top: 0;
+}
+
+#nav-back-icon{
+  height: 40px;
+  margin: 5px 0 5px 10px;
+}
+
+#nav-back-button h3{
+   display: inline-block;
+   font-size: 22px;
+   padding: 10px 10px;
+   top: 0;
+   position: absolute;
+   color: black;
+   clear: right;
+   width: auto;
+}
