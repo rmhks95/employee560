@@ -47,8 +47,6 @@ class newEmployee extends Component {
         document.getElementById("department").value = employee[0]["DepartmentName"]
         var supervisor = document.getElementById("supervisor")
         supervisor.value = employee[0]["SupervisorID"]
-        supervisor.title= employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
-        supervisor.alt = employee[0]["SupFirst"] + " " + employee[0]["SupLast"]
     }).catch(err=> console.log(err))
   }
 
@@ -71,15 +69,13 @@ class newEmployee extends Component {
           firstName: document.getElementById("firstName").value,
           lastName: document.getElementById("lastName").value,
           startDate: document.getElementById("startDate").value,
-          dateLeft: document.getElementById("dateLeft").value,
           email: document.getElementById("email").value,
           position: document.getElementById("position").value,
           office: document.getElementById("office").value,
           department: document.getElementById("department").value,
-          supervisor: document.getElementById("supervisor").value
+          supervisor: document.getElementById("supervisor")?document.getElementById("supervisor").value:null
       }
     }
-    console.log(this.state.idNum)
     if(this.state.idNum==="0"){
         fetch('https://560project.azurewebsites.net/api/newEmployee/',{
             method: 'POST',
@@ -106,6 +102,7 @@ class newEmployee extends Component {
                 // Now remove alarmmsg's content.
                 document.getElementById("alarmmsg").innerHTML = "";
             }else{
+                console.log(info)
                 setTimeout(function () {
                     if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
@@ -146,6 +143,7 @@ class newEmployee extends Component {
                 // Now remove alarmmsg's content.
                 document.getElementById("alarmmsg").innerHTML = "";
             }else{
+                
                 setTimeout(function () {
                     if(document.getElementById("alarmmsg") != null) document.getElementById("alarmmsg").innerHTML = "Failed to Add Employee";
                 }, 3000);
