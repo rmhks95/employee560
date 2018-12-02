@@ -6,7 +6,7 @@ class Home extends Component {
   render() {
     return (
     <div className="App">
-      <h1>Project Home</h1>
+      <h1>Employee Managment</h1>
       {/* Link to List.js */}
       <div id="home-wrap">
           <Link to={'./departments'}>

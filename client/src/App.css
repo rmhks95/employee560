@@ -18,7 +18,7 @@
   left: 0;
   height: 90px;
   background-color: white;
-  border-bottom: 0px solid #dddddd;
+  border-bottom: 0px solid #bbbbbb;
 }
 
 #site{
@@ -32,7 +32,7 @@
 
 h1{
   margin-bottom: 50px;
-  color: #ffcc00;
+  color: #edbe00;
 }
 
 .App {
@@ -71,7 +71,7 @@ h1{
 
 .general-button{;
   height: 50px;
-  background-color: #ffcc00;
+  background-color: #edbe00;
   border: none;
   margin: 10px;
   padding: 15px;
@@ -86,7 +86,7 @@ h1{
   display: inline-table;
   height: 30px;
   box-sizing: border-box;
-  background-color: #dddddd;
+  background-color: #bbbbbb;
   color: white;
   font-weight: bold;
   position: absolute;

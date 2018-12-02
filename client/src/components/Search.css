@@ -7,13 +7,20 @@
   margin-right: auto;
   margin-left: auto;
   width: 700px;
-  height: 70vh;
   min-height: 400px;
-  top: 60px;
+  top: 10px;
   border: 10px solid white;
-  padding-top: 50px;
-  overflow-y: scroll;
+  margin-top: 50px;
   display: none;
+}
+
+#search-info{
+  overflow-y: scroll;
+  height: 65vh;
+}
+
+#test{
+  height: 50px; width: 100%;
 }
 
 #search-button:hover{
@@ -23,9 +30,9 @@
 #search-close{
   width: 30px;
   height: 30px;
-  position: absolute;
   top: 5px;
   right: 5px;
+  position: absolute;
   background-image: url(./assets/close.png);
   background-repeat: no-repeat;
   background-size: contain;
