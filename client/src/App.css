@@ -14,12 +14,13 @@
 #white-bar{
   position:absolute;
   top:0;
-  right: 0;
   left: 0;
   height: 90px;
+  width: 100%;
+  min-width: 900px;
   background-color: white;
   border-bottom: 0px solid #bbbbbb;
-}
+} 
 
 #site{
   top: 0;
