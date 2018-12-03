@@ -23,6 +23,7 @@ class One extends Component {
     //this.getOne();
     this.getDepts();
     document.getElementById("department").style.display = "none";
+    document.getElementById("supervisor").style.display = "none";
     document.getElementById("search-icon").style.display = "none";
   }
 
@@ -46,6 +47,7 @@ class One extends Component {
     var searchType = document.getElementById("selectId").value;
 
     console.log(searchType);
+    console.log(employeeName);
       fetch('https://560project.azurewebsites.net/api/getEmployee/'+searchType+'/'+ employeeName)
       .then(res => res.json())
       .then(employee => {
