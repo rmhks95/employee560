@@ -27,39 +27,14 @@ class One extends Component {
     var searchType = document.getElementById("selectId").value;
 
 
-    if(searchType == "employee"){
-      //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
-      fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
+      fetch('https://560project.azurewebsites.net/api/getEmployee/'+searchType+'/'+ employeeName)
       .then(res => res.json())
       .then(employee => {
         var list = [];
         employee.map(info=> list.push(info))
         this.setState({idNum:list})
       }).catch(err=> console.log(err))
-    }
-
-    else if(searchType == "supervisor"){
-        //USE THIS ENDPOINT FOR THE SUPERVISOR
-        fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
-        .then(res => res.json())
-        .then(employee => {
-          var list = [];
-          employee.map(info=> list.push(info))
-          this.setState({idNum:list})
-        }).catch(err=> console.log(err))
-      }
-
-    else if(searchType == "department"){
-        //USE THIS ENDPOINT FOR THE DEPARTMENT
-        fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
-        .then(res => res.json())
-        .then(employee => {
-          var list = [];
-          employee.map(info=> list.push(info))
-          this.setState({idNum:list})
-        }).catch(err=> console.log(err))
-      }
-
+   
 
   }
 
