@@ -24,10 +24,10 @@ class One extends Component {
     event.preventDefault();
     document.getElementById("one-list").style.display = "block";
     var employeeName = document.getElementById("employeeName").value;
-
+    var section = document.getElementById("catSelect").value;
 
     //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
-    fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/'+section+'/'+ employeeName)
     .then(res => res.json())
     .then(employee => {
       var list = [];
@@ -35,24 +35,24 @@ class One extends Component {
       this.setState({idNum:list})
     }).catch(err=> console.log(err))
 
-    //USE THIS ENDPOINT FOR THE SUPERVISOR
-    fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
-    .then(res => res.json())
-    .then(employee => {
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    // //USE THIS ENDPOINT FOR THE SUPERVISOR
+    // fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
+    // .then(res => res.json())
+    // .then(employee => {
+    //   var list = [];
+    //   employee.map(info=> list.push(info))
+    //   this.setState({idNum:list})
+    // }).catch(err=> console.log(err))
 
 
-    //USE THIS ENDPOINT FOR THE DEPARTMENT
-    fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
-    .then(res => res.json())
-    .then(employee => {
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    // //USE THIS ENDPOINT FOR THE DEPARTMENT
+    // fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
+    // .then(res => res.json())
+    // .then(employee => {
+    //   var list = [];
+    //   employee.map(info=> list.push(info))
+    //   this.setState({idNum:list})
+    // }).catch(err=> console.log(err))
 
 
   }
@@ -68,6 +68,7 @@ class One extends Component {
           {/* Check to see if any items are found*/}
           <div className="input-container">
             <div className="input-title">
+              <select id="catSelect"><option value="employee">Employee</option><option value="supervisor">Supervisor</option><option value="department">Department</option></select>
               <div>Enter Name or ID:</div>
             </div>
               <input type="text" id="employeeName" className="input-result"></input>
