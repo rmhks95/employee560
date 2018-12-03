@@ -81,7 +81,7 @@ class One extends Component {
                                     <br/>
                                     <span className="title">Office: </span>
                                     <br/>
-                                    <span className="title">Supervisor: </span>
+                                    {emp["Supervisor"]?<span className="title">Supervisor: </span>:""}
                                     <br/>
                                   </span>}
 
