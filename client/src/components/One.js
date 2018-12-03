@@ -102,7 +102,6 @@ class One extends Component {
                                     <br/>
                                     <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
                                     <br/>
-                                    {console.log(emp["Supervisor"])}
                                     {emp["Supervisor"]!=" "?<span className="result">{emp["Supervisor"]}</span>:""}
                                     <br/>
                                   </span>}
