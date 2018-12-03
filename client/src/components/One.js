@@ -101,7 +101,6 @@ class One extends Component {
     document.getElementById("search-popup").style.display = "block";
   }
 
-
   render() {
     const { idNum } = this.state;
     return (
@@ -118,9 +117,9 @@ class One extends Component {
                       <option value="supervisor">:Enter Supervisor</option>
                   </select>
             </div>
-              <input type="text" id="employeeName" className="input-result"></input>
-              <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
-              <input type="text" id="supervisor" className="input-result" ></input>
+              <input type="text" id="employeeName" className="input-result" onFocus={() => document.getElementById("employeeName").value = ''}></input>
+              <input id="department" className="input-result" list="departmentList" onFocus={() => document.getElementById("department").value = ''} required></input><datalist id="departmentList"></datalist>
+              <input type="text" id="supervisor" className="input-result" onFocus={() => document.getElementById("supervisor").value = ''}></input>
               <div id="search-icon" onClick={this.searchSuper}></div>
           </div>
           <button className="general-button" type="submit" onClick={this.getOne}>SEARCH</button>
