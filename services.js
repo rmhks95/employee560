@@ -20,11 +20,13 @@ async function getStats(req,res){
         const currently = await sql.query('SELECT Count(*) FROM employee.employee E WHERE E.DateLeft IS NULL');
         const pastYear = await sql.query('SELECT Count(*) FROM employee.employee E WHERE E.DateStarted > DATEADD(year,-1,GETDATE())')
         const countries = await sql.query('SELECT Count(*) FROM employee.Country')
+        const totalSalary = await sql.query('Select Sum(P.Salary) from employee.employee E inner join Employee.Position P on p.positionid=e.positionid')
         
         const info ={
             "currently": currently["recordset"][0][''],
             "pastYear": pastYear["recordset"][0][''],
-            "countries":countries["recordset"][0]['']
+            "countries":countries["recordset"][0][''],
+            "totalSalary":totalSalary["recordset"][0]['']
         }
         res.json(info)
     }catch(err){
