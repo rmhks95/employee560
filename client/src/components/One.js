@@ -30,7 +30,19 @@ class One extends Component {
   getOne(event){
     event.preventDefault();
     document.getElementById("one-list").style.display = "block";
-    var employeeName = document.getElementById("employeeName").value;
+
+    var employeeName = '';
+
+    if(document.getElementById("selectId").value == "supervisor") {
+        employeeName = document.getElementById("supervisor").value;
+    }
+    else if(document.getElementById("selectId").value == "department") {
+        employeeName = document.getElementById("department").value;
+    }
+    else {
+        employeeName = document.getElementById("employeeName").value;
+    }
+
     var searchType = document.getElementById("selectId").value;
 
     console.log(searchType);
@@ -48,21 +60,25 @@ class One extends Component {
   handleSelectChange(){
       document.getElementById("department").value = '';
       document.getElementById("employeeName").value = '';
+      document.getElementById("supervisor").value = '';
 
       if(document.getElementById("selectId").value == "supervisor") {
           document.getElementById("department").style.display = "none";
-          document.getElementById("employeeName").style.display = "block";
+          document.getElementById("employeeName").style.display = "none";
           document.getElementById("search-icon").style.display = "block";
+          document.getElementById("supervisor").style.display = "block";
       }
       else if(document.getElementById("selectId").value == "department") {
           document.getElementById("department").style.display = "block";
           document.getElementById("employeeName").style.display = "none";
           document.getElementById("search-icon").style.display = "none";
+          document.getElementById("supervisor").style.display = "none";
       }
       else {
           document.getElementById("department").style.display = "none";
           document.getElementById("employeeName").style.display = "block";
           document.getElementById("search-icon").style.display = "none";
+          document.getElementById("supervisor").style.display = "none";
       }
   }
 
@@ -104,6 +120,7 @@ class One extends Component {
             </div>
               <input type="text" id="employeeName" className="input-result"></input>
               <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
+              <input type="text" id="supervisor" className="input-result" ></input>
               <div id="search-icon" onClick={this.searchSuper}></div>
           </div>
           <button className="general-button" type="submit" onClick={this.getOne}>SEARCH</button>
