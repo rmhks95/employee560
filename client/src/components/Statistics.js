@@ -42,6 +42,9 @@ class Stats extends Component {
                 <div className="stats-container">
                     <div className="stats-title">Number of Countries that we have offices in: </div><div className="stats-result">{idNum["countries"]}</div>
                 </div>
+                <div className="stats-container">
+                  <div className="stats-title">Total salary for all employees: </div><div className="stats-result">${idNum["totalSalary"]}</div>
+                </div>
           </div>
       </div>
     );
