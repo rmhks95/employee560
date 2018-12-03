@@ -24,35 +24,41 @@ class One extends Component {
     event.preventDefault();
     document.getElementById("one-list").style.display = "block";
     var employeeName = document.getElementById("employeeName").value;
+    var searchType = document.getElementById("selectId").value;
 
 
-    //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
-    fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
-    .then(res => res.json())
-    .then(employee => {
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    if(searchType == "0"){
+      //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
+      fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
+      .then(res => res.json())
+      .then(employee => {
+        var list = [];
+        employee.map(info=> list.push(info))
+        this.setState({idNum:list})
+      }).catch(err=> console.log(err))
+    }
 
-    //USE THIS ENDPOINT FOR THE SUPERVISOR
-    fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
-    .then(res => res.json())
-    .then(employee => {
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    else if(searchType == "2"){
+        //USE THIS ENDPOINT FOR THE SUPERVISOR
+        fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
+        .then(res => res.json())
+        .then(employee => {
+          var list = [];
+          employee.map(info=> list.push(info))
+          this.setState({idNum:list})
+        }).catch(err=> console.log(err))
+      }
 
-
-    //USE THIS ENDPOINT FOR THE DEPARTMENT
-    fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
-    .then(res => res.json())
-    .then(employee => {
-      var list = [];
-      employee.map(info=> list.push(info))
-      this.setState({idNum:list})
-    }).catch(err=> console.log(err))
+    else if(searchType == "1"){
+        //USE THIS ENDPOINT FOR THE DEPARTMENT
+        fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
+        .then(res => res.json())
+        .then(employee => {
+          var list = [];
+          employee.map(info=> list.push(info))
+          this.setState({idNum:list})
+        }).catch(err=> console.log(err))
+      }
 
 
   }
@@ -68,7 +74,11 @@ class One extends Component {
           {/* Check to see if any items are found*/}
           <div className="input-container">
             <div className="input-title">
-              <div>Enter Name or ID:</div>
+                  <select id="selectId">
+                      <option value="0">:Enter Name or ID</option>
+                      <option value="1">:Enter Department</option>
+                      <option value="2">:Enter Supervisor</option>
+                  </select>
             </div>
               <input type="text" id="employeeName" className="input-result"></input>
           </div>
@@ -97,8 +107,8 @@ class One extends Component {
                                     <span className="title">Office: </span>
                                     <br/>
                                   </span>}
-                                  
-                                  
+
+
                               </div>
                               <div id="one-results">
                                   <span className="result">{emp["EmployeeId"]}</span>
@@ -116,8 +126,8 @@ class One extends Component {
                                     <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
                                     <br/>
                                   </span>}
-                                  
-                                  
+
+
                               </div>
                               <Link to={`newEmployee/${emp["EmployeeId"]}`}>
                                   <div className="one-edit">

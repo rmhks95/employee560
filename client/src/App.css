@@ -20,7 +20,7 @@
   min-width: 900px;
   background-color: white;
   border-bottom: 0px solid #bbbbbb;
-} 
+}
 
 #site{
   top: 0;
@@ -93,6 +93,29 @@ h1{
   position: absolute;
   left:0;
   top: 0;
+  font-size: 16px;
+}
+
+#selectId{
+  background-color: #bbbbbb;
+  display: table-cell;
+  text-align: right;
+  padding-right: 8px;
+  vertical-align: middle;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  direction: rtl;
+  width: 100%;
+}
+
+#custom-select{
+
 }
 
 .input-title div{
