@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment';
 import './Search.css';
 
-class One extends Component {
+class Search extends Component {
   // Initialize the state
   constructor(props){
     super(props);
@@ -34,7 +34,7 @@ class One extends Component {
     event.preventDefault();
     document.getElementById("one-list").style.display = "block";
     var employeeName = document.getElementById("employeeName").value;
-    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ employeeName)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
     .then(res => res.json())
     .then(employee => {
       var list = [];
@@ -126,4 +126,4 @@ class One extends Component {
   }
 }
 
-export default One;
+export default Search;

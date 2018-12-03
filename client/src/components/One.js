@@ -33,7 +33,7 @@ class One extends Component {
     var employeeName = document.getElementById("employeeName").value;
     var searchType = document.getElementById("selectId").value;
 
-
+    console.log(searchType);
       fetch('https://560project.azurewebsites.net/api/getEmployee/'+searchType+'/'+ employeeName)
       .then(res => res.json())
       .then(employee => {
@@ -81,7 +81,7 @@ class One extends Component {
   }
 
   //used to search for employeeName
-  searchSuper(){
+  searchSuper(event){
     document.getElementById("search-popup").style.display = "block";
   }
 
