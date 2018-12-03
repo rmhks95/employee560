@@ -64,9 +64,9 @@ async function getEmployee(req, res) {
             D.Name as DepartmentName,
             E.SupervisorID
             from Employee.Employee E
-                INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-                INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-                INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+                left JOIN Employee.Position P on E.PositionID = P.PositionID
+                left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
             where  E.FirstName= '${names[0]}' and E.LastName = '${names[1]}'`)
         }else{
             result = await sql.query(`select
@@ -82,9 +82,9 @@ async function getEmployee(req, res) {
             D.Name as DepartmentName,
             E.SupervisorID
             from Employee.Employee E
-                INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-                INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-                INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+                left JOIN Employee.Position P on E.PositionID = P.PositionID
+                left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
             where  E.FirstName= '${name}' or E.LastName = '${name}'`)
         }
     }else{
@@ -101,9 +101,9 @@ async function getEmployee(req, res) {
         D.Name as DepartmentName,
         E.SupervisorID
         from Employee.Employee E
-            INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-            INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-            INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+            left JOIN Employee.Position P on E.PositionID = P.PositionID
+            left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+            left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
         where E.employeeID = ${name}`)
     }
       // console.log(result)
@@ -139,10 +139,10 @@ async function getEmployeeSup(req, res) {
               D.Name as DepartmentName,
               E.SupervisorID
               from Employee.Employee E
-                  INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
-                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-                  INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+                  left JOIN Employee.Employee S on E.supervisorID = S.employeeID
+                  left JOIN Employee.Position P on E.PositionID = P.PositionID
+                  left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
               where  S.FirstName= '${names[0]}' and S.LastName = '${names[1]}'`)
           }else{
               result = await sql.query(`select
@@ -158,10 +158,10 @@ async function getEmployeeSup(req, res) {
               D.Name as DepartmentName,
               E.SupervisorID
               from Employee.Employee E
-                  INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
-                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-                  INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+                  left JOIN Employee.Employee S on E.supervisorID = S.employeeID
+                  left JOIN Employee.Position P on E.PositionID = P.PositionID
+                  left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
               where  S.FirstName= '${name}' or S.LastName = '${name}'`)
           }
       }else{
@@ -178,10 +178,10 @@ async function getEmployeeSup(req, res) {
           D.Name as DepartmentName,
           E.SupervisorID
           from Employee.Employee E
-              INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
-              INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-              INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-              INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+              left JOIN Employee.Employee S on E.supervisorID = S.employeeID
+              left JOIN Employee.Position P on E.PositionID = P.PositionID
+              left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+              left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
           where S.employeeID = ${name}`)
       }
         // console.log(result)
@@ -211,9 +211,9 @@ async function getEmployeeSup(req, res) {
               D.Name as DepartmentName,
               E.SupervisorID
               from Employee.Employee E
-                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
-                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
-                  INNER JOIN Employee.Department D on E.departmentID = D.departmentID
+                  left JOIN Employee.Position P on E.PositionID = P.PositionID
+                  left JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  left JOIN Employee.Department D on E.departmentID = D.departmentID
               where D.Name= '${name}'`)
       res.json(result["recordset"])
     } catch (err) {

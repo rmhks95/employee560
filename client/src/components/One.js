@@ -27,7 +27,7 @@ class One extends Component {
     var searchType = document.getElementById("selectId").value;
 
 
-    if(searchType == "0"){
+    if(searchType == "employee"){
       //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
       fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
       .then(res => res.json())
@@ -38,7 +38,7 @@ class One extends Component {
       }).catch(err=> console.log(err))
     }
 
-    else if(searchType == "2"){
+    else if(searchType == "supervisor"){
         //USE THIS ENDPOINT FOR THE SUPERVISOR
         fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
         .then(res => res.json())
@@ -49,7 +49,7 @@ class One extends Component {
         }).catch(err=> console.log(err))
       }
 
-    else if(searchType == "1"){
+    else if(searchType == "department"){
         //USE THIS ENDPOINT FOR THE DEPARTMENT
         fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
         .then(res => res.json())
@@ -75,9 +75,9 @@ class One extends Component {
           <div className="input-container">
             <div className="input-title">
                   <select id="selectId">
-                      <option value="0">:Enter Name or ID</option>
-                      <option value="1">:Enter Department</option>
-                      <option value="2">:Enter Supervisor</option>
+                      <option value="employee">:Enter Name or ID</option>
+                      <option value="department">:Enter Department</option>
+                      <option value="supervisor">:Enter Supervisor</option>
                   </select>
             </div>
               <input type="text" id="employeeName" className="input-result"></input>
