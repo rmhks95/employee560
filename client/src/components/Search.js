@@ -105,11 +105,9 @@ class One extends Component {
 
 
                                   </div>
-                                  <Link to={`newEmployee/${emp["EmployeeId"]}`}>
-                                      <div className="one-edit">
-                                          EDIT EMPLOYEE
-                                      </div>
-                                  </Link>
+                                  <div className="one-edit" value={emp["EmployeeId"]} id="search-button" onClick={() => {this.selectSuper(emp["EmployeeId"])}}>
+                                      SELECT EMPLOYEE
+                                  </div>
                                 </div>
 
                               )})}
