@@ -106,6 +106,8 @@ class One extends Component {
                                     <br/>
                                     <span className="title">Office: </span>
                                     <br/>
+                                    <span className="title">Supervisor: </span>
+                                    <br/>
                                   </span>}
 
 
@@ -124,6 +126,8 @@ class One extends Component {
                                     <span className="result">{emp["Title"]} in {emp["DepartmentName"]}</span>
                                     <br/>
                                     <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
+                                    <br/>
+                                    {emp["Supervisor"]?<span className="result">{emp["Supervisor"]}</span>:""}
                                     <br/>
                                   </span>}
 
