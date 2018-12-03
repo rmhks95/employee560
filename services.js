@@ -62,8 +62,10 @@ async function getEmployee(req, res) {
             O.Building,
             O.RoomNumber,
             D.Name as DepartmentName,
-            E.SupervisorID
+            E.SupervisorID,
+            Concat(S.FirstName, ' ' , S.LastName) as Supervisor
             from Employee.Employee E
+                left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
                 left JOIN Employee.Position P on E.PositionID = P.PositionID
                 left JOIN Employee.Office O on E.OfficeID = O.OfficeID
                 left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
@@ -80,8 +82,10 @@ async function getEmployee(req, res) {
             O.Building,
             O.RoomNumber,
             D.Name as DepartmentName,
-            E.SupervisorID
+            E.SupervisorID,
+            Concat(S.FirstName, ' ' , S.LastName) as Supervisor
             from Employee.Employee E
+                left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
                 left JOIN Employee.Position P on E.PositionID = P.PositionID
                 left JOIN Employee.Office O on E.OfficeID = O.OfficeID
                 left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
@@ -99,8 +103,10 @@ async function getEmployee(req, res) {
         O.Building,
         O.RoomNumber,
         D.Name as DepartmentName,
-        E.SupervisorID
+        E.SupervisorID,
+        Concat(S.FirstName, ' '  , S.LastName) as Supervisor
         from Employee.Employee E
+            left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
             left JOIN Employee.Position P on E.PositionID = P.PositionID
             left JOIN Employee.Office O on E.OfficeID = O.OfficeID
             left JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
@@ -137,7 +143,7 @@ async function getEmployeeSup(req, res) {
               O.Building,
               O.RoomNumber,
               D.Name as DepartmentName,
-              E.SupervisorID
+              Concat(S.FirstName, ' ' , S.LastName) as Supervisor
               from Employee.Employee E
                   left JOIN Employee.Employee S on E.supervisorID = S.employeeID
                   left JOIN Employee.Position P on E.PositionID = P.PositionID
@@ -156,7 +162,7 @@ async function getEmployeeSup(req, res) {
               O.Building,
               O.RoomNumber,
               D.Name as DepartmentName,
-              E.SupervisorID
+              Concat(S.FirstName, ' '  , S.LastName) as Supervisor
               from Employee.Employee E
                   left JOIN Employee.Employee S on E.supervisorID = S.employeeID
                   left JOIN Employee.Position P on E.PositionID = P.PositionID
@@ -176,7 +182,7 @@ async function getEmployeeSup(req, res) {
           O.Building,
           O.RoomNumber,
           D.Name as DepartmentName,
-          E.SupervisorID
+          Concat(S.FirstName, ' ' , S.LastName) as Supervisor
           from Employee.Employee E
               left JOIN Employee.Employee S on E.supervisorID = S.employeeID
               left JOIN Employee.Position P on E.PositionID = P.PositionID
@@ -209,8 +215,9 @@ async function getEmployeeSup(req, res) {
               O.Building,
               O.RoomNumber,
               D.Name as DepartmentName,
-              E.SupervisorID
+              Concat(S.FirstName, ' ' , S.LastName) as Supervisor
               from Employee.Employee E
+                  left JOIN Employee.Employee S on E.supervisorID = S.employeeID
                   left JOIN Employee.Position P on E.PositionID = P.PositionID
                   left JOIN Employee.Office O on E.OfficeID = O.OfficeID
                   left JOIN Employee.Department D on E.departmentID = D.departmentID

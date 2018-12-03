@@ -34,39 +34,14 @@ class One extends Component {
     var searchType = document.getElementById("selectId").value;
 
 
-    if(searchType == "employee"){
-      //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
-      fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
+      fetch('https://560project.azurewebsites.net/api/getEmployee/'+searchType+'/'+ employeeName)
       .then(res => res.json())
       .then(employee => {
         var list = [];
         employee.map(info=> list.push(info))
         this.setState({idNum:list})
       }).catch(err=> console.log(err))
-    }
-
-    else if(searchType == "supervisor"){
-        //USE THIS ENDPOINT FOR THE SUPERVISOR
-        fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
-        .then(res => res.json())
-        .then(employee => {
-          var list = [];
-          employee.map(info=> list.push(info))
-          this.setState({idNum:list})
-        }).catch(err=> console.log(err))
-      }
-
-    else if(searchType == "department"){
-        //USE THIS ENDPOINT FOR THE DEPARTMENT
-        fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
-        .then(res => res.json())
-        .then(employee => {
-          var list = [];
-          employee.map(info=> list.push(info))
-          this.setState({idNum:list})
-        }).catch(err=> console.log(err))
-      }
-
+   
 
   }
 
@@ -155,6 +130,8 @@ class One extends Component {
                                     <br/>
                                     <span className="title">Office: </span>
                                     <br/>
+                                    {emp["Supervisor"]!=" "?<span className="title">Supervisor: </span>:""}
+                                    <br/>
                                   </span>}
 
 
@@ -173,6 +150,9 @@ class One extends Component {
                                     <span className="result">{emp["Title"]} in {emp["DepartmentName"]}</span>
                                     <br/>
                                     <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
+                                    <br/>
+                                    {console.log(emp["Supervisor"])}
+                                    {emp["Supervisor"]!=" "?<span className="result">{emp["Supervisor"]}</span>:""}
                                     <br/>
                                   </span>}
 
