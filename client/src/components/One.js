@@ -24,13 +24,37 @@ class One extends Component {
     event.preventDefault();
     document.getElementById("one-list").style.display = "block";
     var employeeName = document.getElementById("employeeName").value;
-    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ employeeName)
+
+
+    //USE THIS ENDPOINT IF IT IS THE EMPLOYEE'S DATA
+    fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
     .then(res => res.json())
     .then(employee => {
       var list = [];
       employee.map(info=> list.push(info))
       this.setState({idNum:list})
     }).catch(err=> console.log(err))
+
+    //USE THIS ENDPOINT FOR THE SUPERVISOR
+    fetch('https://560project.azurewebsites.net/api/getEmployee/supervisor/'+ employeeName)
+    .then(res => res.json())
+    .then(employee => {
+      var list = [];
+      employee.map(info=> list.push(info))
+      this.setState({idNum:list})
+    }).catch(err=> console.log(err))
+
+
+    //USE THIS ENDPOINT FOR THE DEPARTMENT
+    fetch('https://560project.azurewebsites.net/api/getEmployee/department/'+ employeeName)
+    .then(res => res.json())
+    .then(employee => {
+      var list = [];
+      employee.map(info=> list.push(info))
+      this.setState({idNum:list})
+    }).catch(err=> console.log(err))
+
+
   }
 
 

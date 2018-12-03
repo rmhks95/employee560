@@ -40,7 +40,7 @@ class Stats extends Component {
                     <div className="stats-title">Current Employees: </div><div className="stats-result">{idNum["currently"]}</div>
                 </div>
                 <div className="stats-container">
-                    <div className="stats-title">Hired Employee over the last year: </div><div className="stats-result">{idNum["pastYear"]}</div>
+                    <div className="stats-title">Employees hired over the last year: </div><div className="stats-result">{idNum["pastYear"]}</div>
                 </div>
                 <div className="stats-container">
                     <div className="stats-title">Number of Countries that we have offices in: </div><div className="stats-result">{idNum["countries"]}</div>

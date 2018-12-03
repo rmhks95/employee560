@@ -36,9 +36,9 @@ async function getStats(req,res){
 
 }
 
-function getAll(req,res){
-  var list = ["item1","item2", "item3"];
-  res.json(list)
+async function getAll(req,res){
+  var list = await sql.query('SELECT * FROM employee.employee')
+  res.json(list["recordset"])
 }
 
 async function getEmployee(req, res) {
@@ -116,6 +116,111 @@ async function getEmployee(req, res) {
   res.json(list);
 }
 
+async function getEmployeeSup(req, res) {
+    try {
+      const {name} = req.params;
+      var result =""
+      
+      if(!name.match(/\d+/g)){
+          if(name.includes(" ")){
+              var names = name.split(" ");
+              console.log(names)
+              //const result = await sql.query(`select * from Employee.Employee E where EmployeeId = ${id}`)
+              result = await sql.query(`select
+              E.EmployeeId,
+              E.FirstName,
+              E.LastName,
+              E.Email,
+              E.DateStarted,
+              E.DateLeft,
+              P.Title,
+              O.Building,
+              O.RoomNumber,
+              D.Name as DepartmentName,
+              E.SupervisorID
+              from Employee.Employee E
+                  INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
+                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+              where  S.FirstName= '${names[0]}' and S.LastName = '${names[1]}'`)
+          }else{
+              result = await sql.query(`select
+              E.EmployeeId,
+              E.FirstName,
+              E.LastName,
+              E.Email,
+              E.DateStarted,
+              E.DateLeft,
+              P.Title,
+              O.Building,
+              O.RoomNumber,
+              D.Name as DepartmentName,
+              E.SupervisorID
+              from Employee.Employee E
+                  INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
+                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+              where  S.FirstName= '${name}' or S.LastName = '${name}'`)
+          }
+      }else{
+          result = await sql.query(`select
+          E.EmployeeId, 
+          E.FirstName,
+          E.LastName,
+          E.Email,
+          E.DateStarted,
+          E.DateLeft,
+          P.Title,
+          O.Building,
+          O.RoomNumber,
+          D.Name as DepartmentName,
+          E.SupervisorID
+          from Employee.Employee E
+              INNER JOIN Employee.Employee S on E.supervisorID = S.employeeID
+              INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+              INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+              INNER JOIN Employee.Department D on E.DepartmentID = D.DepartmentID 
+          where S.employeeID = ${name}`)
+      }
+        // console.log(result)
+  
+      res.json(result["recordset"])
+      
+    } catch (err) {
+        console.log(err)
+    }
+    res.json(list);
+  }
+
+
+  async function getEmployeeDept(req, res) {
+    try {
+      const {name} = req.params;
+      var result =  await sql.query(`select
+              E.EmployeeId,
+              E.FirstName,
+              E.LastName,
+              E.Email,
+              E.DateStarted,
+              E.DateLeft,
+              P.Title,
+              O.Building,
+              O.RoomNumber,
+              D.Name as DepartmentName,
+              E.SupervisorID
+              from Employee.Employee E
+                  INNER JOIN Employee.Position P on E.PositionID = P.PositionID
+                  INNER JOIN Employee.Office O on E.OfficeID = O.OfficeID
+                  INNER JOIN Employee.Department D on E.departmentID = D.departmentID
+              where D.Name= '${name}'`)
+      res.json(result["recordset"])
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 async function newEmployee(req,res){
   const {idNum,firstName,lastName, startDate, email,position,office, department,supervisor} = req.body
@@ -162,4 +267,4 @@ async function newEmployee(req,res){
 
 
 
-module.exports = {getAll, getEmployee, newEmployee,getFields, getStats, updateEmployee}
+module.exports = {getAll, getEmployee, newEmployee,getFields, getStats, updateEmployee,getEmployeeSup,getEmployeeDept}

@@ -30,9 +30,19 @@ app.get('/api/getStats', (req,res)=>{
     services.getStats(req,res);
 })
 
-// An api endpoint that returns a employee based off the id
-app.get('/api/getEmployee/:name', (req,res) =>  {
+// An api endpoint that returns a employees based off the passed in value(name or id)
+app.get('/api/getEmployee/employee/:name', (req,res) =>  {
     services.getEmployee(req,res);
+});
+
+// An api endpoint that returns a employees based off the passed in department
+app.get('/api/getEmployee/department/:name', (req,res) =>  {
+    services.getEmployeeDept(req,res);
+});
+
+// An api endpoint that returns a employees based off the passed in supervisor
+app.get('/api/getEmployee/supervisor/:name', (req,res) =>  {
+    services.getEmployeeSup(req,res);
 });
 
 app.get('/api/getfields/:name', (req,res)=> {
