@@ -62,6 +62,7 @@ async function getEmployee(req, res) {
             O.Building,
             O.RoomNumber,
             D.Name as DepartmentName,
+            E.SupervisorID,
             Concat(S.FirstName, ' ' , S.LastName) as Supervisor
             from Employee.Employee E
                 left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
@@ -81,6 +82,7 @@ async function getEmployee(req, res) {
             O.Building,
             O.RoomNumber,
             D.Name as DepartmentName,
+            E.SupervisorID,
             Concat(S.FirstName, ' ' , S.LastName) as Supervisor
             from Employee.Employee E
                 left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
@@ -101,6 +103,7 @@ async function getEmployee(req, res) {
         O.Building,
         O.RoomNumber,
         D.Name as DepartmentName,
+        E.SupervisorID,
         Concat(S.FirstName, ' '  , S.LastName) as Supervisor
         from Employee.Employee E
             left JOIN Employee.Employee S on E.SupervisorID= S.employeeid
