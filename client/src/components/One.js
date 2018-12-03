@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment';
 import Nav from './Nav';
 import './One.css';
+import Search from './Search';
 
 class One extends Component {
   // Initialize the state
@@ -12,11 +13,17 @@ class One extends Component {
       idNum: []
     }
     this.getOne = this.getOne.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.getDepts = this.getDepts.bind(this);
+    this.searchSuper = this.searchSuper.bind(this);
   }
 
   // Fetch the list on first mount
   componentDidMount() {
     //this.getOne();
+    this.getDepts();
+    document.getElementById("department").style.display = "none";
+    document.getElementById("search-icon").style.display = "none";
   }
 
   // Retrieves the list of items from the Express app
@@ -38,6 +45,46 @@ class One extends Component {
 
   }
 
+  handleSelectChange(){
+      document.getElementById("department").value = '';
+      document.getElementById("employeeName").value = '';
+
+      if(document.getElementById("selectId").value == "supervisor") {
+          document.getElementById("department").style.display = "none";
+          document.getElementById("employeeName").style.display = "block";
+          document.getElementById("search-icon").style.display = "block";
+      }
+      else if(document.getElementById("selectId").value == "department") {
+          document.getElementById("department").style.display = "block";
+          document.getElementById("employeeName").style.display = "none";
+          document.getElementById("search-icon").style.display = "none";
+      }
+      else {
+          document.getElementById("department").style.display = "none";
+          document.getElementById("employeeName").style.display = "block";
+          document.getElementById("search-icon").style.display = "none";
+      }
+  }
+
+  // Retrieves the list of items from the Express app
+  getDepts = () => {
+      fetch('https://560project.azurewebsites.net/api/getfields/department')
+      .then(res => res.json())
+      .then(info => {
+          info.map(depts=> {
+              var deptList = document.getElementById("departmentList")
+              var newOptionElement = document.createElement("option");
+              newOptionElement.textContent = depts["Name"];
+              deptList.appendChild(newOptionElement);
+          })
+      }).catch(err=>console.log(err))
+  }
+
+  //used to search for employeeName
+  searchSuper(){
+    document.getElementById("search-popup").style.display = "block";
+  }
+
 
   render() {
     const { idNum } = this.state;
@@ -45,17 +92,19 @@ class One extends Component {
       <div className="App">
           <Nav></Nav>
           <h1>Find Employee</h1>
-
+          <Search></Search>
           {/* Check to see if any items are found*/}
           <div className="input-container">
             <div className="input-title">
-                  <select id="selectId">
+                  <select id="selectId" onChange={this.handleSelectChange}>
                       <option value="employee">:Enter Name or ID</option>
                       <option value="department">:Enter Department</option>
                       <option value="supervisor">:Enter Supervisor</option>
                   </select>
             </div>
               <input type="text" id="employeeName" className="input-result"></input>
+              <input id="department" className="input-result" list="departmentList" required></input><datalist id="departmentList"></datalist>
+              <div id="search-icon" onClick={this.searchSuper}></div>
           </div>
           <button className="general-button" type="submit" onClick={this.getOne}>SEARCH</button>
 
