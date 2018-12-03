@@ -81,7 +81,7 @@ class One extends Component {
                                     <br/>
                                     <span className="title">Office: </span>
                                     <br/>
-                                    {emp["Supervisor"]?<span className="title">Supervisor: </span>:""}
+                                    {emp["Supervisor"]!=" "?<span className="title">Supervisor: </span>:""}
                                     <br/>
                                   </span>}
 
@@ -102,7 +102,8 @@ class One extends Component {
                                     <br/>
                                     <span className="result">{emp["RoomNumber"]} in {emp["Building"]}</span>
                                     <br/>
-                                    {emp["Supervisor"]?<span className="result">{emp["Supervisor"]}</span>:""}
+                                    {console.log(emp["Supervisor"])}
+                                    {emp["Supervisor"]!=" "?<span className="result">{emp["Supervisor"]}</span>:""}
                                     <br/>
                                   </span>}
 
