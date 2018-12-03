@@ -32,8 +32,8 @@ class Search extends Component {
   // Retrieves the list of items from the Express app
   getOne(event){
     event.preventDefault();
-    document.getElementById("one-list").style.display = "block";
-    var employeeName = document.getElementById("employeeName").value;
+    document.getElementById("one-list-two").style.display = "block";
+    var employeeName = document.getElementById("employeeNameTwo").value;
     fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ employeeName)
     .then(res => res.json())
     .then(employee => {
@@ -56,11 +56,11 @@ class Search extends Component {
                 <div className="input-title">
                   <div>Enter Name or ID:</div>
                 </div>
-                  <input type="text" id="employeeName" className="input-result"></input>
+                  <input type="text" id="employeeNameTwo" className="input-result"></input>
               </div>
               <button className="general-button" type="submit" onClick={this.getOne}>SEARCH</button>
 
-              <div id="one-list">
+              <div id="one-list-two">
                   {idNum.length ? (
                       <div><br></br>
                             <div>

@@ -41,7 +41,7 @@ class One extends Component {
         employee.map(info=> list.push(info))
         this.setState({idNum:list})
       }).catch(err=> console.log(err))
-   
+
 
   }
 
