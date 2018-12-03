@@ -33,13 +33,14 @@ class newEmployee extends Component {
   }
 
   findPerson(){
-    fetch('https://560project.azurewebsites.net/api/getEmployee/'+ this.state.idNum)
+    fetch('https://560project.azurewebsites.net/api/getEmployee/employee/'+ this.state.idNum)
     .then(res => res.json())
     .then(employee => {
         document.getElementById("firstName").value = employee[0]["FirstName"]
         document.getElementById("lastName").value = employee[0]["LastName"]
         document.getElementById("startDate").value = moment(employee[0]["DateStarted"]).utc().format("YYYY-MM-DD")
-        if(employee[0]["DateLeft"])document.getElementById("dateLeft").value = moment(employee[0]["DateLeft"]).utc().format('YYYY-MM-DD')
+        
+        employee[0]["DateLeft"]?document.getElementById("dateLeft").value = moment(employee[0]["DateLeft"]).utc().format('YYYY-MM-DD'):document.getElementById("dateLeft").min=moment(employee[0]["DateStarted"]).utc().format("YYYY-MM-DD")
         document.getElementById("email").value = employee[0]["Email"]
         document.getElementById("position").value = employee[0]["Title"]
         document.getElementById("office").value = employee[0]["RoomNumber"] +" in " + employee[0]["Building"]
@@ -237,10 +238,11 @@ class newEmployee extends Component {
                     <div className="input-title">
                         <div>Date Left:</div>
                     </div>
-                        <input type="date" id="dateLeft" className="input-result"></input>
+                        <input type="date" id="dateLeft" min={this.state.startDate} className="input-result"></input>
                     </div>: ""
                 }
-
+                {console.log(this.state.startDate)
+                }
                 <div className="input-container">
                 <div className="input-title">
                     <div>Email:</div>
